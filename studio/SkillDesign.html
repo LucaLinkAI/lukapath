@@ -8,15 +8,16 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#07101e;--bg2:#0a1525;--surf:#0f1e35;--card:#131f38;--card2:#172440;
-  --b:rgba(200,165,60,0.14);--b2:rgba(200,165,60,0.26);--b3:rgba(255,255,255,0.07);
-  --gold:#c8a03c;--gl:#e0bc5a;--gf:rgba(200,160,60,0.09);--gf2:rgba(200,160,60,0.16);
-  --w:rgba(240,234,216,1);--w8:rgba(240,234,216,0.8);--w6:rgba(240,234,216,0.6);--w4:rgba(240,234,216,0.4);--w2:rgba(240,234,216,0.18);
-  --personal:#3050a0;--personal-l:#7090e0;--personal-f:rgba(48,80,160,0.15);--personal-b:rgba(80,120,220,0.3);
-  --family:#1a5040;--family-l:#40b890;--family-f:rgba(26,80,64,0.15);--family-b:rgba(60,180,140,0.3);
-  --child:#6a1428;--child-l:#e08090;--child-f:rgba(106,20,40,0.15);--child-b:rgba(220,80,100,0.3);
-  --meta:#7a3010;--meta-l:#e8a050;--meta-f:rgba(120,48,16,0.18);--meta-b:rgba(220,140,60,0.35);
-  --fuzzy:#3a1858;--fuzzy-l:#b080e0;--fuzzy-f:rgba(58,24,88,0.18);--fuzzy-b:rgba(140,80,220,0.3);
+  --bg:#f6f2e9;--bg2:#efe9db;--surf:#ebe4d3;--card:#fffdf7;--card2:#f3ecdd;
+  --b:rgba(150,118,36,0.20);--b2:rgba(150,118,36,0.34);--b3:rgba(30,36,50,0.10);
+  --gold:#a87f24;--gl:#8c6716;--gf:rgba(168,127,36,0.10);--gf2:rgba(168,127,36,0.18);
+  --w:rgba(28,33,46,0.94);--w8:rgba(28,33,46,0.80);--w6:rgba(28,33,46,0.58);--w4:rgba(28,33,46,0.42);--w2:rgba(28,33,46,0.16);
+  --personal:#3358a8;--personal-l:#3358a8;--personal-f:rgba(51,88,168,0.10);--personal-b:rgba(51,88,168,0.34);
+  --family:#1f7a59;--family-l:#1f7a59;--family-f:rgba(31,122,89,0.10);--family-b:rgba(31,122,89,0.34);
+  --child:#b23a52;--child-l:#b23a52;--child-f:rgba(178,58,82,0.10);--child-b:rgba(178,58,82,0.34);
+  --business:#44607c;--business-l:#44607c;--business-f:rgba(68,96,124,0.10);--business-b:rgba(68,96,124,0.34);
+  --meta:#b5651d;--meta-l:#b5651d;--meta-f:rgba(181,101,29,0.12);--meta-b:rgba(181,101,29,0.40);
+  --fuzzy:#7a45b0;--fuzzy-l:#7a45b0;--fuzzy-f:rgba(122,69,176,0.10);--fuzzy-b:rgba(122,69,176,0.34);
 }
 body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;font-size:14px;line-height:1.8;padding:0 24px 80px}
 .page{max-width:1000px;margin:0 auto}
@@ -37,7 +38,7 @@ body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;f
 .section{margin-bottom:60px}
 
 /* META SKILL NODE */
-.meta-node{background:linear-gradient(135deg,var(--meta-f),rgba(0,0,0,0.2));border:1.5px solid var(--meta-b);border-radius:14px;padding:18px 24px;display:flex;align-items:center;gap:16px;margin-bottom:8px;position:relative}
+.meta-node{background:linear-gradient(135deg,var(--meta-f),rgba(255,255,255,0.55));border:1.5px solid var(--meta-b);border-radius:14px;padding:18px 24px;display:flex;align-items:center;gap:16px;margin-bottom:8px;position:relative}
 .meta-node::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:1.5px;height:8px;background:var(--gold)}
 .meta-icon{font-size:28px}
 .meta-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--meta-l);margin-bottom:3px;text-transform:uppercase}
@@ -45,20 +46,23 @@ body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;f
 .meta-desc{font-size:12px;color:var(--w6);margin-top:2px}
 
 /* SKILL CARDS */
-.skill-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:0}
+.skill-row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:0}
 .skill-card{border-radius:12px;padding:18px 18px 16px;position:relative}
 .skill-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1.5px;height:14px;top:-14px}
-.sk-personal{background:linear-gradient(135deg,var(--personal-f),rgba(0,0,0,0.25));border:0.5px solid var(--personal-b)}
+.sk-personal{background:linear-gradient(135deg,var(--personal-f),rgba(255,255,255,0.6));border:0.5px solid var(--personal-b)}
 .sk-personal::before{background:var(--personal-l)}
-.sk-family{background:linear-gradient(135deg,var(--family-f),rgba(0,0,0,0.25));border:0.5px solid var(--family-b)}
+.sk-family{background:linear-gradient(135deg,var(--family-f),rgba(255,255,255,0.6));border:0.5px solid var(--family-b)}
 .sk-family::before{background:var(--family-l)}
-.sk-child{background:linear-gradient(135deg,var(--child-f),rgba(0,0,0,0.25));border:0.5px solid var(--child-b)}
+.sk-child{background:linear-gradient(135deg,var(--child-f),rgba(255,255,255,0.6));border:0.5px solid var(--child-b)}
 .sk-child::before{background:var(--child-l)}
+.sk-business{background:linear-gradient(135deg,var(--business-f),rgba(255,255,255,0.6));border:0.5px solid var(--business-b)}
+.sk-business::before{background:var(--business-l)}
 .skill-icon{font-size:22px;margin-bottom:8px}
 .skill-name-en{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;margin-bottom:5px;text-transform:uppercase}
 .sk-personal .skill-name-en{color:var(--personal-l)}
 .sk-family .skill-name-en{color:var(--family-l)}
 .sk-child .skill-name-en{color:var(--child-l)}
+.sk-business .skill-name-en{color:var(--business-l)}
 .skill-name-zh{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:500;color:var(--w);margin-bottom:8px}
 .skill-desc{font-size:11.5px;color:var(--w6);line-height:1.7}
 .skill-steps{margin-top:10px;padding-top:10px;border-top:0.5px solid var(--b3)}
@@ -80,6 +84,7 @@ body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;f
 .scenario-badge{font-family:'DM Mono',monospace;font-size:10px;padding:3px 12px;border-radius:20px;letter-spacing:0.1em;font-weight:500}
 .badge-single{background:var(--family-f);border:1px solid var(--family-b);color:var(--family-l)}
 .badge-multi{background:var(--personal-f);border:1px solid var(--personal-b);color:var(--personal-l)}
+.badge-business{background:var(--business-f);border:1px solid var(--business-b);color:var(--business-l)}
 .badge-fuzzy{background:var(--fuzzy-f);border:1px solid var(--fuzzy-b);color:var(--fuzzy-l)}
 .scenario-title{font-family:'Noto Serif SC',serif;font-size:16px;font-weight:500;color:var(--w)}
 .scenario-body{padding:20px 22px 22px}
@@ -90,7 +95,7 @@ body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;f
 .flow-node-label{font-size:9.5px;color:var(--w4);font-family:'DM Mono',monospace;letter-spacing:0.08em;margin-bottom:3px;text-transform:uppercase}
 .flow-node-main{font-family:'Noto Serif SC',serif;font-size:13px;font-weight:500;line-height:1.3}
 .flow-node-sub{font-size:10px;color:var(--w4);margin-top:2px}
-.fn-user{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.12)}
+.fn-user{background:rgba(30,36,50,0.04);border:0.5px solid rgba(30,36,50,0.14)}
 .fn-user .flow-node-main{color:var(--w)}
 .fn-meta{background:var(--meta-f);border:0.5px solid var(--meta-b)}
 .fn-meta .flow-node-main{color:var(--meta-l)}
@@ -100,6 +105,8 @@ body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;f
 .fn-family .flow-node-main{color:var(--family-l)}
 .fn-child{background:var(--child-f);border:0.5px solid var(--child-b)}
 .fn-child .flow-node-main{color:var(--child-l)}
+.fn-business{background:var(--business-f);border:0.5px solid var(--business-b)}
+.fn-business .flow-node-main{color:var(--business-l)}
 .fn-output{background:var(--gf);border:0.5px solid var(--b2)}
 .fn-output .flow-node-main{color:var(--gl)}
 .fn-question{background:var(--fuzzy-f);border:0.5px solid var(--fuzzy-b)}
@@ -133,6 +140,8 @@ body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;f
 .op-2 .op-title{color:var(--family-l)}
 .op-3{background:var(--child-f);border:0.5px solid var(--child-b)}
 .op-3 .op-title{color:var(--child-l)}
+.op-4{background:var(--business-f);border:0.5px solid var(--business-b)}
+.op-4 .op-title{color:var(--business-l)}
 .op-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--w4);margin-bottom:3px}
 .op-title{font-weight:600;font-size:13px;margin-bottom:3px}
 .op-desc{font-size:11px;color:var(--w6)}
@@ -233,6 +242,19 @@ body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;f
       </div>
     </div>
 
+    <div class="skill-card sk-business">
+      <div class="skill-icon">🤝</div>
+      <div class="skill-name-en">business-partner-report</div>
+      <div class="skill-name-zh">事业合伙人相性报告</div>
+      <div class="skill-desc">八字 × MBTI × 五行商业能量<br>合伙化学 / 互补矩阵 / 大运时机 / 分工建议</div>
+      <div class="skill-steps">
+        <div class="skill-step"><span class="skill-step-num">1</span>团队人数 + 行业</div>
+        <div class="skill-step"><span class="skill-step-num">2</span>合伙人信息批量收集</div>
+        <div class="skill-step"><span class="skill-step-num">3</span>团队架构与分工<span style="color:var(--w4)">（3人+）</span></div>
+        <div class="skill-step"><span class="skill-step-num">4</span>确认生成</div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -286,7 +308,7 @@ body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;f
       </div>
 
       <!-- Flow A3: Children -->
-      <div>
+      <div style="margin-bottom:14px;">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--child-l);letter-spacing:0.12em;margin-bottom:8px;">ROUTE C · 孩子AI报告</div>
         <div class="flow">
           <div class="flow-node fn-user"><div class="flow-node-label">用户</div><div class="flow-node-main">"孩子AI时代怎么培养"</div></div>
@@ -298,6 +320,22 @@ body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;f
           <div class="flow-node fn-child"><div class="flow-node-label">收集</div><div class="flow-node-main">5步问答</div></div>
           <div class="flow-arrow">→</div>
           <div class="flow-node fn-output"><div class="flow-node-label">输出</div><div class="flow-node-main">AI发展报告 HTML</div></div>
+        </div>
+      </div>
+
+      <!-- Flow A4: Business -->
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--business-l);letter-spacing:0.12em;margin-bottom:8px;">ROUTE D · 合伙人相性</div>
+        <div class="flow">
+          <div class="flow-node fn-user"><div class="flow-node-label">用户</div><div class="flow-node-main">"我们合伙人适合一起创业吗"</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node fn-meta"><div class="flow-node-label">lucapath</div><div class="flow-node-main">识别：事业合伙</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node fn-business"><div class="flow-node-label">路由</div><div class="flow-node-main">business-partner</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node fn-business"><div class="flow-node-label">收集</div><div class="flow-node-main">3–4步问答</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node fn-output"><div class="flow-node-label">输出</div><div class="flow-node-main">合伙相性 HTML</div></div>
         </div>
       </div>
     </div>
@@ -354,7 +392,7 @@ body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;f
       <div class="scenario-title">模糊兜底 — 菜单引导 + 一次澄清</div>
     </div>
     <div class="scenario-body">
-      <div style="font-size:13px;color:var(--w6);margin-bottom:20px;">用户需求不明确时，lucapath 展示三选项菜单，最多追问一次，然后直接进入对应流程。</div>
+      <div style="font-size:13px;color:var(--w6);margin-bottom:20px;">用户需求不明确时，lucapath 展示四选项菜单，最多追问一次，然后直接进入对应流程。</div>
 
       <!-- Flow: fuzzy -->
       <div class="flow" style="margin-bottom:20px;">
@@ -362,7 +400,7 @@ body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;f
         <div class="flow-arrow">→</div>
         <div class="flow-node fn-meta"><div class="flow-node-label">lucapath</div><div class="flow-node-main">无法判断类型</div></div>
         <div class="flow-arrow">→</div>
-        <div class="flow-node fn-question"><div class="flow-node-label">展示菜单</div><div class="flow-node-main">三选项</div></div>
+        <div class="flow-node fn-question"><div class="flow-node-label">展示菜单</div><div class="flow-node-main">四选项</div></div>
         <div class="flow-arrow">→</div>
         <div class="flow-node fn-meta"><div class="flow-node-label">用户选择</div><div class="flow-node-main">明确意图</div></div>
         <div class="flow-arrow">→</div>
@@ -386,6 +424,11 @@ body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;f
           <div class="op-num">选项 ③</div>
           <div class="op-title">AI时代孩子发展报告</div>
           <div class="op-desc">孩子的天赋×命盘×兴趣，规划AI时代成长路径</div>
+        </div>
+        <div class="option-pill op-4">
+          <div class="op-num">选项 ④</div>
+          <div class="op-title">事业合伙人相性报告</div>
+          <div class="op-desc">合伙人之间的命盘化学、互补分工与大运时机</div>
         </div>
       </div>
 
@@ -440,13 +483,18 @@ body{background:var(--bg);color:var(--w);font-family:'Noto Sans SC',sans-serif;f
           <td>孩子 + 发展/AI关键词</td>
         </tr>
         <tr>
+          <td>"合伙人分析" / "我们适合一起创业吗" / "创业团队相性" / "事业合盘"</td>
+          <td style="color:var(--business-l);font-weight:500;">business-partner-report</td>
+          <td>2–6位合伙人 + 商业/创业关键词</td>
+        </tr>
+        <tr>
           <td>"全家分析 + 孩子AI发展"</td>
           <td style="color:var(--gl);font-weight:500;">family-report → children-ai-report</td>
           <td>多报告串联，数据复用</td>
         </tr>
         <tr>
           <td>"帮我做个分析" / "我想了解命理" / 语意模糊</td>
-          <td style="color:var(--fuzzy-l);font-weight:500;">展示三选项菜单</td>
+          <td style="color:var(--fuzzy-l);font-weight:500;">展示四选项菜单</td>
           <td>模糊兜底，最多追问一次</td>
         </tr>
       </tbody>
