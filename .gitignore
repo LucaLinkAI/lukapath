@@ -8,6 +8,9 @@ dist/lucapath-plugin/
 # Generated client reports (sensitive data)
 Report/
 
+# Sample reports contain personal information
+Template/
+
 # Node
 node_modules/
 studio/node_modules/

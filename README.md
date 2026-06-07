@@ -67,7 +67,8 @@ python3 scripts/pack.py --out ./release --plugin-name my-plugin
 | Artifact | Format | Use |
 |----------|--------|-----|
 | `<name>.skill` | ZIP archive | Share / import individual skills |
-| `lucapath-plugin/` | Plugin directory | Import all 5 skills into Cowork at once |
+| `lucapath-plugin/` | Plugin directory | Exploded plugin — inspect or extend |
+| `lucapath-plugin.plugin` | ZIP archive | **Upload to Cowork via "Upload plugin"** |
 
 The plugin directory structure:
 
@@ -89,7 +90,4 @@ Always edit skill source files under `.claude/skills/`, then re-run `pack.py` to
 
 - `PRD/LucaPath_product_design.html` — personas, feature architecture, pricing, roadmap
 - `PRD/sancai_product_design.html` — earlier 三才 branding iteration
-- `Template/Personal/` — visual reference for individual report output
-- `Template/Family/` — visual reference for family report output
-- `Template/Children/` — visual reference for children AI-era report output
 - `lucapath_skill_architecture.html` — skill routing diagram
