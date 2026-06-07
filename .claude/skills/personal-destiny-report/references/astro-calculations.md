@@ -99,6 +99,7 @@ Result: extreme willpower, independent judgment, commands respect. More than one
 - 申子辰 → 将星 at 子 | 寅午戌 → 将星 at 午
 - 亥卯未 → 将星 at 卯 | 巳酉丑 → 将星 at 酉
 Count how many pillar branches hit the target. Indicates leadership and organizational ability.
+⚠️ 将星 is **命格类** — NEVER place it in 凶煞类. It is a positive leadership star, not a challenging star.
 
 **驿马 Travel Star** (from Year/Day branch group):
 - 申子辰 → 驿马 at 寅 | 寅午戌 → 驿马 at 申

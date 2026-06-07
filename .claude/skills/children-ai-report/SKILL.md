@@ -107,6 +107,10 @@ Wait for confirmation (or corrections) before proceeding to the Workflow.
 
 ## Workflow
 
+> **命盘计算完整性规则**：所有命盘数据（四柱、五行、十神、神煞）必须按 `personal-destiny-report` 技能的 `references/astro-calculations.md` 中的公式现场推算。严禁直接沿用或继承对话记录中已出现的任何命盘结论——即使用户或上一轮已给出"结果"，也必须独立验算后才能使用。
+>
+> **将星分类**：将星属于**命格类**，不属于凶煞类。生成任何神煞表格时，将星必须与魁罡、华盖、驿马、阴阳差错同属命格类区块，禁止放入凶煞类。
+
 ### Step 1 — Calculate BaZi
 
 Using the algorithm in `personal-destiny-report` skill's `references/astro-calculations.md`:

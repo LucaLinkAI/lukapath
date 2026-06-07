@@ -105,6 +105,10 @@ Show a brief summary, then ask:
 
 ## Workflow
 
+> **命盘计算完整性规则**：所有命盘数据（四柱、五行、十神、神煞）必须按 `references/astro-calculations.md` 中的公式现场推算。严禁直接沿用或继承对话记录中已出现的任何命盘结论——即使用户或上一轮已给出"结果"，也必须独立验算后才能使用。
+>
+> **将星分类**：将星属于**命格类**，不属于凶煞类。在任何神煞表格或分析中，将星必须归入命格类区块。
+
 ### Step 1 — Calculate BaZi (八字)
 
 Read `references/astro-calculations.md` → **BaZi section** for the algorithm.
