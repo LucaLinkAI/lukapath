@@ -1,6 +1,6 @@
 import { query } from '@anthropic-ai/claude-agent-sdk';
 import type { Options, SDKMessage } from '@anthropic-ai/claude-agent-sdk';
-import { PROJECT_ROOT } from './config.ts';
+import { PROJECT_ROOT, AGENT_MODEL } from './config.ts';
 import type { SessionState } from './sessions.ts';
 
 // Decided once at boot by probeSkills(): does skill resolution work from a nested
@@ -26,6 +26,7 @@ export type AgentEvent =
 function baseOptions(session: SessionState): Options {
   return {
     cwd: cwdMode === 'session' ? session.outputDir : PROJECT_ROOT,
+    model: AGENT_MODEL,
     settingSources: ['user', 'project', 'local'], // loads PROJECT_ROOT/.claude/skills
     permissionMode: 'bypassPermissions', // headless: no human to approve tool prompts
     allowDangerouslySkipPermissions: true,
@@ -165,6 +166,7 @@ export async function probeSkills(
   async function runProbe(cwd: string): Promise<{ skills: string[]; authed: boolean; reason?: string }> {
     const options: Options = {
       cwd,
+      model: AGENT_MODEL,
       settingSources: ['user', 'project', 'local'],
       permissionMode: 'bypassPermissions',
       allowDangerouslySkipPermissions: true,

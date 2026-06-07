@@ -5,18 +5,21 @@ import { PORT, OUTPUT_ROOT, PROJECT_ROOT, EXPECTED_SKILLS } from './config.ts';
 import { authRouter } from './routes/auth.routes.ts';
 import { chatRouter } from './routes/chat.routes.ts';
 import { artifactRouter } from './routes/artifact.routes.ts';
+import { uploadRouter } from './routes/upload.routes.ts';
 import { probeSkills, getCwdMode } from './agent.ts';
 
 fs.mkdirSync(OUTPUT_ROOT, { recursive: true });
 
 const app = express();
 app.use(cors());
-app.use(express.json({ limit: '1mb' }));
+// Raised from 1mb to accommodate base64-encoded file/photo attachments.
+app.use(express.json({ limit: '32mb' }));
 
 app.get('/api/health', (_req, res) => res.json({ ok: true }));
 app.use('/api/auth', authRouter);
 app.use('/api/chat', chatRouter);
 app.use('/api/artifact', artifactRouter);
+app.use('/api/upload', uploadRouter);
 
 app.listen(PORT, async () => {
   console.log(`\n  ┌─ LucaPath Studio server`);

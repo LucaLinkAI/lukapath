@@ -29,8 +29,8 @@ export function Landing() {
     <div className="landing">
       <div className="landing-eyebrow">路卡成长罗盘 · LucaPath Studio</div>
       <div className="landing-logo">
-        三才
-        <span className="en">SĀNCÁI · Destiny Intelligence</span>
+        LucaPath
+        <span className="en">Destiny Intelligence</span>
       </div>
       <div className="landing-tagline">
         融合 <strong>八字命理 · MBTI心理 · 西方星盘 · 紫微斗数</strong>，

@@ -1,9 +1,33 @@
 import { create } from 'zustand';
 import type { ChatSession, Message, Artifact, AuthStatus } from '../types';
-import { streamChat } from '../api/chatStream';
+import { streamChat, uploadFiles } from '../api/chatStream';
 
 function uid() {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
+}
+
+export type Theme = 'dark' | 'light';
+
+// Resolve the initial theme from localStorage and apply it to <html> before first
+// paint so there's no flash of the wrong theme.
+function initTheme(): Theme {
+  let t: Theme = 'dark';
+  try {
+    if (localStorage.getItem('lp-theme') === 'light') t = 'light';
+  } catch {
+    /* ignore */
+  }
+  if (typeof document !== 'undefined') document.documentElement.dataset.theme = t;
+  return t;
+}
+
+function applyTheme(t: Theme) {
+  if (typeof document !== 'undefined') document.documentElement.dataset.theme = t;
+  try {
+    localStorage.setItem('lp-theme', t);
+  } catch {
+    /* ignore */
+  }
 }
 
 type Store = {
@@ -13,14 +37,19 @@ type Store = {
   order: string[]; // localIds, most-recent first
   activeId: string | null; // localId
   busy: boolean;
+  drawerOpen: boolean; // right-side preview drawer
+  theme: Theme;
 
   setEntered: (v: boolean) => void;
   setAuth: (a: AuthStatus) => void;
   newChat: () => string; // returns localId
   selectChat: (localId: string) => void;
   current: () => ChatSession | null;
-  send: (prompt: string, opts?: { newChat?: boolean }) => Promise<void>;
-  setActiveArtifact: (file: string) => void;
+  send: (prompt: string, opts?: { newChat?: boolean; attachments?: File[] }) => Promise<void>;
+  setActiveArtifact: (file: string) => void; // also opens the drawer
+  setDrawerOpen: (v: boolean) => void;
+  toggleDrawer: () => void;
+  toggleTheme: () => void;
 };
 
 export const useStore = create<Store>((set, get) => ({
@@ -30,9 +59,19 @@ export const useStore = create<Store>((set, get) => ({
   order: [],
   activeId: null,
   busy: false,
+  drawerOpen: false,
+  theme: initTheme(),
 
   setEntered: (v) => set({ entered: v }),
   setAuth: (a) => set({ auth: a }),
+  setDrawerOpen: (v) => set({ drawerOpen: v }),
+  toggleDrawer: () => set((s) => ({ drawerOpen: !s.drawerOpen })),
+  toggleTheme: () =>
+    set((s) => {
+      const theme: Theme = s.theme === 'dark' ? 'light' : 'dark';
+      applyTheme(theme);
+      return { theme };
+    }),
 
   newChat: () => {
     const localId = uid();
@@ -64,7 +103,10 @@ export const useStore = create<Store>((set, get) => ({
     if (!activeId) return;
     const s = sessions[activeId];
     if (!s) return;
-    set({ sessions: { ...sessions, [activeId]: { ...s, activeArtifact: file } } });
+    set({
+      sessions: { ...sessions, [activeId]: { ...s, activeArtifact: file } },
+      drawerOpen: true,
+    });
   },
 
   send: async (prompt, opts) => {
@@ -80,22 +122,40 @@ export const useStore = create<Store>((set, get) => ({
         return { sessions: { ...st.sessions, [lid]: mut(cur) } };
       });
 
-    // append user message + a placeholder assistant message
-    const userMsg: Message = { id: uid(), role: 'user', text: prompt };
+    const attachments = opts?.attachments ?? [];
+    const attachNote = attachments.length
+      ? `\n\n📎 ${attachments.map((f) => f.name).join(' · ')}`
+      : '';
+
+    // append user message (with any attachment names) + a placeholder assistant message
+    const userMsg: Message = { id: uid(), role: 'user', text: prompt + attachNote };
     const asstMsg: Message = { id: uid(), role: 'assistant', text: '', tools: [] };
     patch((s) => ({
       ...s,
-      title: s.messages.length === 0 ? prompt.slice(0, 24) : s.title,
+      title: s.messages.length === 0 ? prompt.slice(0, 24) || '附件' : s.title,
       messages: [...s.messages, userMsg, asstMsg],
     }));
     // bump recency
     set((st) => ({ order: [lid, ...st.order.filter((x) => x !== lid)] }));
     set({ busy: true });
 
-    const serverSessionId = get().sessions[lid]?.id || undefined;
+    let serverSessionId = get().sessions[lid]?.id || undefined;
+    let agentPrompt = prompt;
 
     try {
-      await streamChat({ sessionId: serverSessionId, prompt }, (ev) => {
+      // Upload attachments first (creates the server session if needed), then
+      // hand the agent their absolute paths so it can Read them this turn.
+      if (attachments.length) {
+        const up = await uploadFiles(serverSessionId, attachments);
+        serverSessionId = up.sessionId;
+        patch((s) => ({ ...s, id: up.sessionId }));
+        const list = up.files.map((f) => `- ${f.path}`).join('\n');
+        agentPrompt =
+          `${prompt}\n\n[用户上传了 ${up.files.length} 个文件，已保存到以下绝对路径，` +
+          `请用 Read 工具按需读取（图片可直接读取）：\n${list}\n]`;
+      }
+
+      await streamChat({ sessionId: serverSessionId, prompt: agentPrompt }, (ev) => {
         switch (ev.type) {
           case 'session':
             patch((s) => ({ ...s, id: ev.sessionId }));
@@ -125,7 +185,15 @@ export const useStore = create<Store>((set, get) => ({
               accent: ev.accent,
               artifacts: [...s.artifacts.filter((a) => a.file !== art.file), art],
               activeArtifact: art.file,
+              // attach an inline card to the assistant message that produced it
+              messages: s.messages.map((m) =>
+                m.id === asstMsg.id
+                  ? { ...m, artifacts: [...(m.artifacts ?? []).filter((a) => a.file !== art.file), art] }
+                  : m,
+              ),
             }));
+            // auto-open the preview drawer when a file is generated
+            set({ drawerOpen: true });
             break;
           }
           case 'error':
@@ -144,6 +212,14 @@ export const useStore = create<Store>((set, get) => ({
             break;
         }
       });
+    } catch (err: any) {
+      const message = String(err?.message ?? err);
+      patch((s) => ({
+        ...s,
+        messages: s.messages.map((m) =>
+          m.id === asstMsg.id ? { ...m, text: m.text + `\n\n⚠ ${message}` } : m,
+        ),
+      }));
     } finally {
       set({ busy: false });
     }

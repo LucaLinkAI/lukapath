@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LucaPath Studio · Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #07101e;
+    --bg2: #0a1525;
+    --surf: #0f1e35;
+    --card: #131f38;
+    --card2: #172440;
+    --b: rgba(200, 165, 60, 0.14);
+    --b2: rgba(200, 165, 60, 0.26);
+    --b3: rgba(255, 255, 255, 0.08);
+    --gold: #c8a03c;
+    --gl: #e0bc5a;
+    --gf: rgba(200, 160, 60, 0.09);
+    --gf2: rgba(200, 160, 60, 0.16);
+    --w: rgba(240, 234, 216, 1);
+    --w8: rgba(240, 234, 216, 0.82);
+    --w6: rgba(240, 234, 216, 0.6);
+    --w4: rgba(240, 234, 216, 0.42);
+    --w2: rgba(240, 234, 216, 0.2);
+    --personal: #7090e0;
+    --family: #40b890;
+    --child: #e08090;
+    --business: #c8a03c;
+    --multi: #a060d0;
+    --meta: #e8a050;
+    --serif: 'Noto Serif SC', serif;
+    --sans: 'Noto Sans SC', sans-serif;
+    --mono: 'DM Mono', monospace;
+    --garamond: 'Cormorant Garamond', serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(200, 160, 60, 0.06), transparent 60%),
+      radial-gradient(900px 500px at -10% 20%, rgba(112, 144, 224, 0.05), transparent 55%),
+      var(--bg);
+    color: var(--w8);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    padding: 0 0 80px;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  a { color: var(--gl); text-decoration: none; }
+
+  /* ── Hero ── */
+  header.hero {
+    padding: 70px 0 46px;
+    border-bottom: 0.5px solid var(--b3);
+    margin-bottom: 52px;
+    background:
+      radial-gradient(700px 320px at 50% -40%, rgba(200, 160, 60, 0.10), transparent 70%);
+  }
+  .kicker {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 46px;
+    line-height: 1.12;
+    color: var(--w);
+    letter-spacing: -0.01em;
+  }
+  h1 .en {
+    display: block;
+    font-family: var(--garamond);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 26px;
+    color: var(--w4);
+    margin-top: 8px;
+    letter-spacing: 0.01em;
+  }
+  .lede {
+    margin-top: 24px;
+    max-width: 720px;
+    font-size: 16.5px;
+    color: var(--w6);
+  }
+  .lede strong { color: var(--gl); font-weight: 600; }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 26px;
+  }
+  .pill {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--w6);
+    border: 1px solid var(--b2);
+    background: var(--gf);
+    border-radius: 20px;
+    padding: 6px 14px;
+  }
+
+  /* ── Sections ── */
+  section { margin-bottom: 60px; scroll-margin-top: 24px; }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 22px;
+    padding-bottom: 12px;
+    border-bottom: 0.5px solid var(--b3);
+  }
+  .sec-num {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--gold);
+  }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--w);
+  }
+  h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--gl);
+    margin: 30px 0 12px;
+  }
+  p { margin-bottom: 14px; }
+  p.note { color: var(--w6); font-size: 14px; }
+  code {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    background: var(--surf);
+    border: 0.5px solid var(--b3);
+    padding: 1.5px 6px;
+    border-radius: 5px;
+    color: var(--gl);
+  }
+  strong { color: var(--w); font-weight: 600; }
+
+  /* ── Layered system diagram ── */
+  .stack { display: flex; flex-direction: column; gap: 0; margin: 8px 0 4px; }
+  .tier {
+    position: relative;
+    border: 1px solid var(--b2);
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    padding: 18px 20px;
+    margin-bottom: 6px;
+  }
+  .tier-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--w4);
+    margin-bottom: 12px;
+  }
+  .tier.client { border-color: rgba(112, 144, 224, 0.4); }
+  .tier.client .tier-label { color: var(--personal); }
+  .tier.server { border-color: rgba(64, 184, 144, 0.4); }
+  .tier.server .tier-label { color: var(--family); }
+  .tier.sdk { border-color: rgba(200, 160, 60, 0.45); }
+  .tier.sdk .tier-label { color: var(--gold); }
+  .tier.cloud { border-color: rgba(224, 128, 144, 0.4); }
+  .tier.cloud .tier-label { color: var(--child); }
+  .nodes { display: flex; flex-wrap: wrap; gap: 10px; }
+  .node {
+    flex: 1 1 150px;
+    min-width: 140px;
+    background: var(--surf);
+    border: 0.5px solid var(--b3);
+    border-radius: 9px;
+    padding: 11px 13px;
+  }
+  .node .nt { font-size: 13.5px; color: var(--w); font-weight: 500; }
+  .node .nd { font-size: 11.5px; color: var(--w4); font-family: var(--mono); margin-top: 3px; }
+  .arrow {
+    text-align: center;
+    color: var(--w4);
+    font-size: 18px;
+    line-height: 1;
+    margin: 1px 0 7px;
+  }
+  .arrow span {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--w4);
+    display: block;
+    margin-top: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Cards grid ── */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+  .gcard {
+    background: var(--card);
+    border: 0.5px solid var(--b2);
+    border-radius: 12px;
+    padding: 16px 17px;
+  }
+  .gcard .h {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--gl);
+    margin-bottom: 7px;
+  }
+  .gcard .d { font-size: 13.5px; color: var(--w6); }
+
+  /* ── Tables ── */
+  .tbl { width: 100%; border-collapse: collapse; margin: 6px 0 4px; font-size: 13.5px; }
+  .tbl th, .tbl td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 0.5px solid var(--b3);
+    vertical-align: top;
+  }
+  .tbl th {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gf);
+  }
+  .tbl td:first-child { white-space: nowrap; }
+  .tbl td code { white-space: nowrap; }
+  .tbl tr:hover td { background: rgba(255, 255, 255, 0.015); }
+
+  /* ── Sequence flow ── */
+  .flow { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 0.5px solid var(--b3);
+  }
+  .step:last-child { border-bottom: none; }
+  .step .idx {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--b2);
+    background: var(--gf);
+    color: var(--gl);
+    font-family: var(--mono);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step .body { flex: 1; }
+  .step .title { color: var(--w); font-weight: 500; font-size: 14.5px; }
+  .step .title .who {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--w4);
+    border: 0.5px solid var(--b3);
+    border-radius: 5px;
+    padding: 1px 7px;
+    margin-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .step .desc { font-size: 13.5px; color: var(--w6); margin-top: 3px; }
+
+  /* ── Callout ── */
+  .callout {
+    border: 1px solid var(--b2);
+    border-left: 3px solid var(--gold);
+    background: var(--gf);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 18px 0;
+  }
+  .callout .ct {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .callout p { margin-bottom: 0; color: var(--w8); font-size: 14px; }
+
+  ul.clean { list-style: none; margin: 6px 0 14px; }
+  ul.clean li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 9px;
+    font-size: 14px;
+    color: var(--w6);
+  }
+  ul.clean li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--gold);
+    font-size: 10px;
+  }
+  ul.clean li strong { color: var(--w8); }
+
+  /* ── Sequence diagram ── */
+  .seq-wrap {
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 0.5px solid var(--b2);
+    border-radius: 14px;
+    padding: 14px 10px 6px;
+    margin: 12px 0 18px;
+    overflow-x: auto;
+  }
+  .seq { display: block; width: 100%; min-width: 760px; height: auto; }
+  .seq .lifeline { stroke: var(--b2); stroke-width: 1; stroke-dasharray: 3 6; }
+  .seq .actor-box { rx: 9; stroke-width: 1; }
+  .seq .actor-t { font-family: var(--mono); font-size: 12px; font-weight: 500; fill: var(--w); }
+  .seq .actor-s { font-family: var(--mono); font-size: 9px; fill: var(--w4); letter-spacing: 0.04em; }
+  .seq .call { stroke: var(--gold); stroke-width: 1.4; }
+  .seq .ret { stroke: var(--w4); stroke-width: 1.2; stroke-dasharray: 5 4; }
+  .seq .self { stroke: var(--gl); stroke-width: 1.3; fill: none; }
+  .seq .msg { font-family: var(--mono); font-size: 11px; fill: var(--w8); }
+  .seq .msg-sub { font-family: var(--mono); font-size: 9.5px; fill: var(--w4); }
+  .seq .loopbox { fill: rgba(200, 160, 60, 0.05); stroke: var(--b2); stroke-width: 1; stroke-dasharray: 4 4; rx: 8; }
+  .seq .loop-tag { font-family: var(--mono); font-size: 10px; fill: var(--gold); letter-spacing: 0.08em; }
+  .seq .step-n { font-family: var(--mono); font-size: 9.5px; fill: var(--gold); }
+
+  pre.code {
+    background: #060c16;
+    border: 0.5px solid var(--b3);
+    border-radius: 10px;
+    padding: 16px 18px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--w8);
+    margin: 12px 0 16px;
+  }
+  pre.code .c { color: var(--w4); }
+  pre.code .k { color: var(--gl); }
+  pre.code .s { color: var(--family); }
+
+  footer {
+    margin-top: 70px;
+    padding-top: 26px;
+    border-top: 0.5px solid var(--b3);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--w4);
+    text-align: center;
+  }
+
+  /* TOC */
+  nav.toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 30px 0 0;
+  }
+  nav.toc a {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--w6);
+    border: 0.5px solid var(--b3);
+    border-radius: 8px;
+    padding: 7px 13px;
+    transition: all 0.15s;
+  }
+  nav.toc a:hover { border-color: var(--b2); background: var(--gf); color: var(--gl); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">路卡成长罗盘 · System Architecture</div>
+    <h1>LucaPath Studio
+      <span class="en">A local chat app that runs on your Claude subscription</span>
+    </h1>
+    <p class="lede">
+      LucaPath Studio wraps four Chinese destiny-report <strong>skills</strong> behind a
+      Claude-style chat UI. A React client talks to a thin Express server, which drives the
+      <strong>Claude Agent SDK</strong> — and the SDK runs entirely on the machine's
+      <strong>Claude Code Pro/Max subscription</strong>. No Anthropic API key is ever used.
+    </p>
+    <div class="meta-row">
+      <span class="pill">React 18 + Vite + Zustand</span>
+      <span class="pill">Express 4 + tsx</span>
+      <span class="pill">@anthropic-ai/claude-agent-sdk</span>
+      <span class="pill">SSE streaming</span>
+      <span class="pill">No API key · subscription auth</span>
+      <span class="pill">Model: claude-sonnet-4-6</span>
+    </div>
+    <nav class="toc">
+      <a href="#overview">1 · Overview</a>
+      <a href="#stack">2 · System Layers</a>
+      <a href="#client">3 · Client</a>
+      <a href="#server">4 · Server</a>
+      <a href="#subscription">5 · Subscription Integration</a>
+      <a href="#chat">6 · Chat Lifecycle</a>
+      <a href="#artifacts">7 · Artifacts &amp; Uploads</a>
+      <a href="#files">8 · File Map</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 1 OVERVIEW -->
+  <section id="overview">
+    <div class="sec-head"><span class="sec-num">01</span><h2>What it is</h2></div>
+    <p>
+      LucaPath Studio is a <strong>local, single-user web app</strong>. The user chats in
+      Chinese about a person, a family, a child, or business partners; the chat is handled by
+      Claude running one of the project's report <strong>skills</strong>, which collects birth
+      data turn-by-turn and ultimately writes a polished, self-contained HTML destiny report.
+      That report previews live in a slide-in drawer and can be downloaded or opened in the
+      browser.
+    </p>
+    <div class="grid">
+      <div class="gcard">
+        <div class="h">Left · Sidebar</div>
+        <div class="d">New chat, the four report-type shortcuts, and an in-memory "recents" list.</div>
+      </div>
+      <div class="gcard">
+        <div class="h">Center · Chat</div>
+        <div class="d">Streaming conversation that drives the skills. Composer supports file / photo attachments.</div>
+      </div>
+      <div class="gcard">
+        <div class="h">Right · Preview Drawer</div>
+        <div class="d">Generated report HTML, rendered in a sandboxed iframe. Opens automatically on generation.</div>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="ct">Core idea</div>
+      <p>
+        The server is deliberately thin. It does not call the Anthropic REST API. It hands a
+        prompt to the Agent SDK and re-broadcasts the SDK's stream to the browser as SSE. All
+        the intelligence — and all the auth — lives in the local Claude Code runtime.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2 STACK -->
+  <section id="stack">
+    <div class="sec-head"><span class="sec-num">02</span><h2>System layers</h2></div>
+    <p class="note">Four tiers, top to bottom. Each arrow is a process / network boundary.</p>
+    <div class="stack">
+
+      <div class="tier client">
+        <div class="tier-label">① Browser · React SPA (localhost:3000)</div>
+        <div class="nodes">
+          <div class="node"><div class="nt">Landing / Studio</div><div class="nd">auth gate → 2-col grid</div></div>
+          <div class="node"><div class="nt">Zustand store</div><div class="nd">sessions · theme · drawer</div></div>
+          <div class="node"><div class="nt">chatStream.ts</div><div class="nd">SSE parser · upload</div></div>
+        </div>
+      </div>
+
+      <div class="arrow">↓<span>HTTP · /api proxied by Vite → :8787 · SSE for chat</span></div>
+
+      <div class="tier server">
+        <div class="tier-label">② Node · Express server (localhost:8787)</div>
+        <div class="nodes">
+          <div class="node"><div class="nt">routes/chat · auth</div><div class="nd">SSE · probe</div></div>
+          <div class="node"><div class="nt">routes/upload · artifact</div><div class="nd">files in/out</div></div>
+          <div class="node"><div class="nt">sessions · artifacts</div><div class="nd">in-memory state</div></div>
+        </div>
+      </div>
+
+      <div class="arrow">↓<span>in-process function call · query()</span></div>
+
+      <div class="tier sdk">
+        <div class="tier-label">③ Claude Agent SDK + Claude Code CLI (child process)</div>
+        <div class="nodes">
+          <div class="node"><div class="nt">query()</div><div class="nd">turns · tools · skills</div></div>
+          <div class="node"><div class="nt">claude_code preset</div><div class="nd">Read/Write/Bash/Skill</div></div>
+          <div class="node"><div class="nt">OAuth credentials</div><div class="nd">~/.claude (your login)</div></div>
+        </div>
+      </div>
+
+      <div class="arrow">↓<span>HTTPS · authenticated with subscription OAuth token</span></div>
+
+      <div class="tier cloud">
+        <div class="tier-label">④ Anthropic · billed to your Pro/Max subscription</div>
+        <div class="nodes">
+          <div class="node"><div class="nt">Claude (Sonnet 4.6)</div><div class="nd">model inference</div></div>
+          <div class="node"><div class="nt">Streaming response</div><div class="nd">tokens · tool calls</div></div>
+        </div>
+      </div>
+
+    </div>
+    <p class="note" style="margin-top:14px">
+      The browser never talks to Anthropic directly, and the Express server never holds an API
+      key. Tier ③ is the trust boundary: the SDK reuses whatever account is already logged into
+      Claude Code on this machine.
+    </p>
+  </section>
+
+  <!-- 3 CLIENT -->
+  <section id="client">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Client architecture</h2></div>
+    <p>
+      A single-page React 18 app built with Vite. All UI state lives in one Zustand store; all
+      styling lives in <code>theme.css</code> driven by CSS variables (a dark navy/gold default
+      and a <code>[data-theme='light']</code> warm-paper override). The dev server runs on
+      <code>:3000</code> with <code>strictPort</code> and proxies <code>/api</code> → <code>:8787</code>.
+    </p>
+    <table class="tbl">
+      <thead><tr><th>Module</th><th>Responsibility</th></tr></thead>
+      <tbody>
+        <tr><td><code>App.tsx</code></td><td>Renders <code>&lt;Landing/&gt;</code> until <code>entered</code>, then <code>&lt;Studio/&gt;</code>.</td></tr>
+        <tr><td><code>screens/Landing.tsx</code></td><td>Auth gate. Calls <code>GET /api/auth/status</code>; stores <code>AuthStatus</code> (incl. the live model id used by the composer badge).</td></tr>
+        <tr><td><code>screens/Studio.tsx</code></td><td>2-column grid (Sidebar + Chat). Adds <code>.drawer-open</code> so the chat reflows when the preview drawer slides in.</td></tr>
+        <tr><td><code>components/ChatPanel.tsx</code></td><td>Message list + Claude-style composer (attach, drag-drop, paste, model·effort badge). Top bar holds the status dot, drawer toggle, and theme toggle. Generated files render as inline <strong>FileCards</strong>.</td></tr>
+        <tr><td><code>components/ArtifactPanel.tsx</code></td><td>Fixed slide-in drawer previewing report HTML in a sandboxed iframe. Open-in-browser / refresh / download / close.</td></tr>
+        <tr><td><code>components/Sidebar.tsx</code></td><td>New chat, report-type shortcuts, recents.</td></tr>
+        <tr><td><code>state/store.ts</code></td><td>Zustand store: <code>sessions</code>, <code>busy</code>, <code>auth</code>, <code>drawerOpen</code>, <code>theme</code>. Owns <code>send()</code> (upload → stream → attach artifacts).</td></tr>
+        <tr><td><code>api/chatStream.ts</code></td><td><code>streamChat()</code> (parses the SSE wire format), <code>fetchAuthStatus()</code>, <code>uploadFiles()</code>.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <div class="ct">In-memory by design</div>
+      <p>There is no client-side persistence beyond the theme preference (<code>localStorage['lp-theme']</code>). Conversations and recents are kept in the Zustand store and reset on reload / server restart.</p>
+    </div>
+  </section>
+
+  <!-- 4 SERVER -->
+  <section id="server">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Server architecture</h2></div>
+    <p>
+      An Express 4 app run directly from TypeScript via <code>tsx</code>. It mounts four route
+      groups, keeps session state in memory, and translates Agent SDK events into SSE frames.
+      The JSON body limit is raised to <strong>32&nbsp;MB</strong> to accept base64 file uploads.
+    </p>
+    <table class="tbl">
+      <thead><tr><th>Module</th><th>Responsibility</th></tr></thead>
+      <tbody>
+        <tr><td><code>index.ts</code></td><td>Bootstraps Express, mounts routes, runs the boot probe (auth + skill discovery), chooses the agent <em>cwd mode</em>.</td></tr>
+        <tr><td><code>config.ts</code></td><td>Paths (<code>PROJECT_ROOT</code> = repo root holding <code>.claude/skills</code>), <code>EXPECTED_SKILLS</code>, and <code>AGENT_MODEL</code> (pinned to <code>claude-sonnet-4-6</code>; env-overridable).</td></tr>
+        <tr><td><code>agent.ts</code></td><td>Wraps the SDK <code>query()</code>. Builds options, runs a turn, normalizes SDK messages into <code>AgentEvent</code>s, captures <code>.html</code> Write paths. Holds <code>probeSkills()</code>.</td></tr>
+        <tr><td><code>auth.ts</code></td><td><code>checkClaudeAuth()</code>: a tiny probe query reporting <code>{ ok, apiKeySource, model }</code>. Cached ~30 s.</td></tr>
+        <tr><td><code>sessions.ts</code></td><td>In-memory <code>SessionState</code> map. Each session owns an <code>output/&lt;uuid&gt;/</code> dir and the SDK session id (for resume).</td></tr>
+        <tr><td><code>artifacts.ts</code></td><td><code>detectArtifacts()</code>: after a turn, finds generated <code>.html</code> (Write events ∪ a non-recursive dir scan); relocates strays into the session dir.</td></tr>
+        <tr><td><code>sse.ts</code></td><td>Minimal SSE writer: <code>event:</code>/<code>data:</code> frames + a 15 s heartbeat.</td></tr>
+        <tr><td><code>routes/chat</code></td><td><code>POST /api/chat</code> → SSE stream of <code>session / start / token / tool / artifact / error / done</code>.</td></tr>
+        <tr><td><code>routes/auth</code></td><td><code>GET /api/auth/status</code>.</td></tr>
+        <tr><td><code>routes/artifact</code></td><td><code>GET /api/artifact/:sid/:file</code> — whitelisted against <code>session.artifacts</code> (no raw path join → no traversal).</td></tr>
+        <tr><td><code>routes/upload</code></td><td><code>POST /api/upload</code> — base64 files → <code>output/&lt;uuid&gt;/uploads/</code>, returns absolute paths.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 5 SUBSCRIPTION -->
+  <section id="subscription">
+    <div class="sec-head"><span class="sec-num">05</span><h2>How it uses your local Claude Pro/Max subscription</h2></div>
+    <p>
+      This is the defining trait of the app: <strong>no Anthropic API key, no billing through
+      the API</strong>. Inference is authenticated and billed exactly as if you were typing into
+      the <code>claude</code> CLI yourself.
+    </p>
+
+    <h3>The chain of trust</h3>
+    <div class="flow">
+      <div class="step">
+        <div class="idx">1</div>
+        <div class="body">
+          <div class="title">You log into Claude Code once <span class="who">terminal</span></div>
+          <div class="desc">Running <code>claude</code> and signing in with your Claude Pro/Max account stores OAuth credentials under <code>~/.claude</code> on this machine. The app never sees your password or token — it just relies on this login existing.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="idx">2</div>
+        <div class="body">
+          <div class="title">The server imports the Agent SDK <span class="who">server</span></div>
+          <div class="desc"><code>@anthropic-ai/claude-agent-sdk</code>'s <code>query()</code> launches the Claude Code runtime as a child process, using the <code>claude_code</code> tool preset. That runtime picks up the same <code>~/.claude</code> credentials.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="idx">3</div>
+        <div class="body">
+          <div class="title">Requests bill against the subscription <span class="who">anthropic</span></div>
+          <div class="desc">When the runtime calls Anthropic, it presents the subscription's OAuth token — not an API key. The model runs on your Pro/Max quota. The boot probe confirms this: the <code>system/init</code> message reports <code>apiKeySource: "none"</code>.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="idx">4</div>
+        <div class="body">
+          <div class="title">The app gates entry on this being healthy <span class="who">client</span></div>
+          <div class="desc">The landing page calls <code>GET /api/auth/status</code>. If the probe query streams a <code>system/init</code> without an <code>authentication_failed</code> error, you're in. If not, the UI tells you to run <code>claude</code> and log in first.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>The exact SDK options</h3>
+    <p class="note">From <code>agent.ts › baseOptions()</code> — the configuration that makes a headless, skill-aware, subscription-backed turn possible:</p>
+    <pre class="code"><span class="c">// server/src/agent.ts</span>
+{
+  cwd: <span class="k">session.outputDir</span>,            <span class="c">// reports + uploads land here, per session</span>
+  model: <span class="s">'claude-sonnet-4-6'</span>,        <span class="c">// pinned via AGENT_MODEL (CLI default is 4.5)</span>
+  settingSources: [<span class="s">'user'</span>, <span class="s">'project'</span>, <span class="s">'local'</span>], <span class="c">// loads ../.claude/skills</span>
+  permissionMode: <span class="s">'bypassPermissions'</span>,  <span class="c">// headless: no human to approve tool prompts</span>
+  allowDangerouslySkipPermissions: <span class="k">true</span>,
+  tools: { type: <span class="s">'preset'</span>, preset: <span class="s">'claude_code'</span> }, <span class="c">// Read/Write/Bash/Skill/…</span>
+  includePartialMessages: <span class="k">true</span>,           <span class="c">// token-by-token streaming</span>
+  additionalDirectories: [<span class="k">session.outputDir</span>, <span class="k">PROJECT_ROOT</span>],
+  resume: <span class="k">session.sdkSessionId</span>             <span class="c">// continue the same conversation each turn</span>
+}</pre>
+
+    <ul class="clean">
+      <li><strong>No API key anywhere.</strong> There is no <code>ANTHROPIC_API_KEY</code> in the code or env path; auth is the local subscription via Claude Code.</li>
+      <li><strong>Skills load from the repo.</strong> <code>settingSources</code> makes the SDK discover <code>../.claude/skills</code>; <code>probeSkills()</code> at boot picks the working directory (nested session dir vs. project root) that resolves all four skills.</li>
+      <li><strong>Headless autonomy.</strong> <code>bypassPermissions</code> lets the agent use tools (write the report, read uploads) without an interactive approval prompt — there is no human at the CLI.</li>
+      <li><strong>Stateful conversation.</strong> The first turn captures <code>session_id</code> from <code>system/init</code>; every later turn passes it as <code>resume</code>, so a skill's multi-step intake flows across messages.</li>
+      <li><strong>Pinned model.</strong> <code>AGENT_MODEL</code> forces Sonnet 4.6 so behavior and the in-app badge are explicit (the CLI would otherwise default to Sonnet 4.5).</li>
+    </ul>
+
+    <div class="callout">
+      <div class="ct">Implication</div>
+      <p>
+        Because auth is the machine's login, the app is inherently <strong>single-user and
+        local</strong>. Whoever is signed into Claude Code is the identity every request runs
+        as. This is the right model for a personal desktop tool, and the wrong model for a
+        multi-tenant hosted service.
+      </p>
+    </div>
+  </section>
+
+  <!-- 6 CHAT LIFECYCLE -->
+  <section id="chat">
+    <div class="sec-head"><span class="sec-num">06</span><h2>A chat turn, end to end</h2></div>
+    <div class="flow">
+      <div class="step"><div class="idx">1</div><div class="body">
+        <div class="title">User sends a message <span class="who">client</span></div>
+        <div class="desc"><code>store.send()</code> appends the user message and an empty assistant placeholder, flips <code>busy</code>, and (if there are attachments) uploads them first.</div>
+      </div></div>
+      <div class="step"><div class="idx">2</div><div class="body">
+        <div class="title">POST /api/chat opens an SSE stream <span class="who">server</span></div>
+        <div class="desc">The route resolves/creates the session, emits <code>session</code> + <code>start</code>, then iterates <code>runTurn()</code>. A <code>res 'close'</code> listener aborts the turn if the browser disconnects.</div>
+      </div></div>
+      <div class="step"><div class="idx">3</div><div class="body">
+        <div class="title">Agent SDK runs the turn <span class="who">sdk</span></div>
+        <div class="desc"><code>query()</code> streams SDK messages. Text deltas → <code>token</code> events; <code>tool_use</code> blocks → <code>tool</code> chips; <code>.html</code> Write paths are captured for artifact detection.</div>
+      </div></div>
+      <div class="step"><div class="idx">4</div><div class="body">
+        <div class="title">Client renders the stream live <span class="who">client</span></div>
+        <div class="desc">The SSE parser appends tokens to the assistant bubble and shows tool chips (e.g. "技能：lucapath", "写入报告：…html") as they arrive.</div>
+      </div></div>
+      <div class="step"><div class="idx">5</div><div class="body">
+        <div class="title">Artifacts detected after the turn <span class="who">server</span></div>
+        <div class="desc"><code>detectArtifacts()</code> finds new report HTML and emits an <code>artifact</code> event with a served URL + accent color; then a final <code>done</code>.</div>
+      </div></div>
+      <div class="step"><div class="idx">6</div><div class="body">
+        <div class="title">Drawer opens, file card appears <span class="who">client</span></div>
+        <div class="desc">The artifact is attached to the assistant message (inline FileCard) and the preview drawer auto-opens to the report.</div>
+      </div></div>
+    </div>
+
+    <h3>Sequence diagram</h3>
+    <p class="note">Lifelines left → right: Browser · Express server · Agent SDK + Claude Code CLI · Anthropic. Solid gold = calls; dashed = streamed returns; looped arrow = in-process work.</p>
+    <div class="seq-wrap">
+      <svg class="seq" viewBox="0 0 1000 660" role="img" aria-label="Sequence diagram of a chat turn">
+        <defs>
+          <marker id="ah-call" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M0,0 L8,3.2 L0,6.4 Z" fill="#c8a03c" />
+          </marker>
+          <marker id="ah-ret" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M0,0 L8,3.2 L0,6.4 Z" fill="rgba(240,234,216,0.42)" />
+          </marker>
+          <marker id="ah-self" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M0,0 L7,3 L0,6 Z" fill="#e0bc5a" />
+          </marker>
+        </defs>
+
+        <!-- lifelines -->
+        <line class="lifeline" x1="130" y1="62" x2="130" y2="636" />
+        <line class="lifeline" x1="400" y1="62" x2="400" y2="636" />
+        <line class="lifeline" x1="660" y1="62" x2="660" y2="636" />
+        <line class="lifeline" x1="900" y1="62" x2="900" y2="636" />
+
+        <!-- actor headers -->
+        <g>
+          <rect class="actor-box" x="62" y="16" width="136" height="40" fill="rgba(112,144,224,0.14)" stroke="rgba(112,144,224,0.5)" />
+          <text class="actor-t" x="130" y="34" text-anchor="middle">Browser</text>
+          <text class="actor-s" x="130" y="47" text-anchor="middle">React · store</text>
+        </g>
+        <g>
+          <rect class="actor-box" x="332" y="16" width="136" height="40" fill="rgba(64,184,144,0.14)" stroke="rgba(64,184,144,0.5)" />
+          <text class="actor-t" x="400" y="34" text-anchor="middle">Server</text>
+          <text class="actor-s" x="400" y="47" text-anchor="middle">Express · routes</text>
+        </g>
+        <g>
+          <rect class="actor-box" x="592" y="16" width="136" height="40" fill="rgba(200,160,60,0.16)" stroke="rgba(200,160,60,0.55)" />
+          <text class="actor-t" x="660" y="34" text-anchor="middle">Agent SDK</text>
+          <text class="actor-s" x="660" y="47" text-anchor="middle">Claude Code CLI</text>
+        </g>
+        <g>
+          <rect class="actor-box" x="832" y="16" width="136" height="40" fill="rgba(224,128,144,0.14)" stroke="rgba(224,128,144,0.5)" />
+          <text class="actor-t" x="900" y="34" text-anchor="middle">Anthropic</text>
+          <text class="actor-s" x="900" y="47" text-anchor="middle">Claude · Sonnet 4.6</text>
+        </g>
+
+        <!-- 1. Browser → Server -->
+        <text class="step-n" x="135" y="88">1</text>
+        <text class="msg" x="265" y="88" text-anchor="middle">POST /api/chat { prompt }</text>
+        <line class="call" x1="130" y1="98" x2="400" y2="98" marker-end="url(#ah-call)" />
+
+        <!-- 2. Server self: session/start -->
+        <path class="self" d="M400,116 h44 v20 h-44" marker-end="url(#ah-self)" />
+        <text class="msg-sub" x="452" y="124">create session</text>
+        <text class="msg-sub" x="452" y="136">emit session · start (SSE)</text>
+
+        <!-- 3. Server → SDK -->
+        <text class="step-n" x="405" y="168">3</text>
+        <text class="msg" x="530" y="168" text-anchor="middle">runTurn() → query()</text>
+        <line class="call" x1="400" y1="178" x2="660" y2="178" marker-end="url(#ah-call)" />
+        <text class="msg-sub" x="530" y="194" text-anchor="middle">resume · model · skills · bypassPermissions</text>
+
+        <!-- 4. SDK → Anthropic -->
+        <text class="step-n" x="665" y="222">4</text>
+        <text class="msg" x="780" y="222" text-anchor="middle">HTTPS request</text>
+        <line class="call" x1="660" y1="232" x2="900" y2="232" marker-end="url(#ah-call)" />
+        <text class="msg-sub" x="780" y="248" text-anchor="middle">OAuth token · billed to Pro/Max</text>
+
+        <!-- loop box -->
+        <rect class="loopbox" x="92" y="268" width="836" height="150" />
+        <text class="loop-tag" x="104" y="285">loop ▸ while streaming</text>
+
+        <!-- 5. Anthropic ⇠ SDK -->
+        <text class="step-n" x="865" y="312" text-anchor="end">5</text>
+        <text class="msg" x="780" y="312" text-anchor="middle">token · tool_use</text>
+        <line class="ret" x1="900" y1="322" x2="660" y2="322" marker-end="url(#ah-ret)" />
+
+        <!-- 6. SDK ⇠ Server -->
+        <text class="step-n" x="625" y="356" text-anchor="end">6</text>
+        <text class="msg" x="530" y="356" text-anchor="middle">AgentEvent { token, tool }</text>
+        <line class="ret" x1="660" y1="366" x2="400" y2="366" marker-end="url(#ah-ret)" />
+
+        <!-- 7. Server ⇠ Browser -->
+        <text class="step-n" x="365" y="400" text-anchor="end">7</text>
+        <text class="msg" x="265" y="400" text-anchor="middle">SSE: token / tool chip</text>
+        <line class="ret" x1="400" y1="410" x2="130" y2="410" marker-end="url(#ah-ret)" />
+
+        <!-- 8. SDK self: write report -->
+        <path class="self" d="M660,440 h44 v20 h-44" marker-end="url(#ah-self)" />
+        <text class="msg-sub" x="712" y="448">Skill writes</text>
+        <text class="msg-sub" x="712" y="460">report .html</text>
+
+        <!-- 9. SDK → Server: done -->
+        <text class="step-n" x="625" y="492" text-anchor="end">9</text>
+        <text class="msg" x="530" y="492" text-anchor="middle">result: done</text>
+        <line class="ret" x1="660" y1="502" x2="400" y2="502" marker-end="url(#ah-ret)" />
+
+        <!-- 10. Server self: detectArtifacts -->
+        <path class="self" d="M400,520 h44 v20 h-44" marker-end="url(#ah-self)" />
+        <text class="msg-sub" x="452" y="534">detectArtifacts()</text>
+
+        <!-- 11. Server → Browser: artifact + done -->
+        <text class="step-n" x="365" y="572" text-anchor="end">11</text>
+        <text class="msg" x="265" y="572" text-anchor="middle">SSE: artifact + done</text>
+        <line class="call" x1="400" y1="582" x2="130" y2="582" marker-end="url(#ah-call)" />
+
+        <!-- 12. Browser self: open drawer -->
+        <path class="self" d="M130,600 h44 v20 h-44" marker-end="url(#ah-self)" />
+        <text class="msg-sub" x="182" y="614">open drawer ·</text>
+        <text class="msg-sub" x="182" y="626">inline FileCard</text>
+      </svg>
+    </div>
+
+    <h3>SSE event vocabulary</h3>
+    <table class="tbl">
+      <thead><tr><th>Event</th><th>Payload</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>session</code></td><td>sessionId</td><td>Server session id (used as <code>resume</code> next turn)</td></tr>
+        <tr><td><code>start</code></td><td>turnId</td><td>Turn began</td></tr>
+        <tr><td><code>token</code></td><td>text</td><td>Streamed assistant text delta</td></tr>
+        <tr><td><code>tool</code></td><td>name, summary</td><td>A tool was invoked (chip in the UI)</td></tr>
+        <tr><td><code>artifact</code></td><td>file, url, accent</td><td>A report HTML was generated</td></tr>
+        <tr><td><code>error</code></td><td>message</td><td>Auth or turn error (shown in the bubble)</td></tr>
+        <tr><td><code>done</code></td><td>turnId</td><td>Turn complete; stream closes</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 7 ARTIFACTS & UPLOADS -->
+  <section id="artifacts">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Artifacts &amp; uploads</h2></div>
+    <h3>Outbound — generated reports</h3>
+    <p>
+      Skills are steered to write report HTML into the session's <code>output/&lt;uuid&gt;/</code>
+      directory (absolute path injected into the prompt). After each turn the server detects
+      them via the union of <strong>Write-tool events</strong> and a <strong>non-recursive
+      directory scan</strong>, relocating any stray written outside the session dir back in.
+      They are served read-only through a <strong>whitelisted</strong> artifact route — the
+      requested file must match a registered artifact, so user input never becomes a raw path.
+    </p>
+    <h3>Inbound — file &amp; photo attachments</h3>
+    <p>
+      The composer accepts files via the <code>+</code> button, drag-and-drop, or paste. On
+      send, they're base64-encoded and POSTed to <code>/api/upload</code>, which saves them into
+      <code>output/&lt;uuid&gt;/uploads/</code> and returns absolute paths. Those paths are then
+      injected into the prompt so the agent can <code>Read</code> them within the same turn.
+      Uploads live in a subdirectory that the artifact scan ignores, so they're never mistaken
+      for generated reports.
+    </p>
+    <div class="callout">
+      <div class="ct">Security posture</div>
+      <p>
+        Single-user/local, so the threat model is small — but the file routes still avoid path
+        traversal by whitelisting artifacts and sanitizing upload filenames, and report previews
+        run in a sandboxed <code>&lt;iframe&gt;</code>.
+      </p>
+    </div>
+  </section>
+
+  <!-- 8 FILE MAP -->
+  <section id="files">
+    <div class="sec-head"><span class="sec-num">08</span><h2>File map</h2></div>
+    <pre class="code">studio/
+├─ client/                      <span class="c"># React 18 + Vite + Zustand</span>
+│  ├─ vite.config.ts            <span class="c"># :3000 strictPort, proxy /api → :8787 (no SSE buffering)</span>
+│  └─ src/
+│     ├─ App.tsx                <span class="c"># entered ? Studio : Landing</span>
+│     ├─ screens/               <span class="c"># Landing (auth gate) · Studio (grid)</span>
+│     ├─ components/            <span class="c"># ChatPanel · ArtifactPanel · Sidebar</span>
+│     ├─ state/store.ts         <span class="c"># Zustand: sessions · auth · drawer · theme</span>
+│     ├─ api/chatStream.ts      <span class="c"># SSE parser · auth · upload helpers</span>
+│     ├─ types.ts               <span class="c"># shared Message/Artifact/SSEEvent/AuthStatus</span>
+│     └─ theme.css              <span class="c"># all styling · dark + light CSS variables</span>
+│
+├─ server/                      <span class="c"># Express 4 + Claude Agent SDK (tsx)</span>
+│  └─ src/
+│     ├─ index.ts               <span class="c"># bootstrap · mount routes · boot probe</span>
+│     ├─ config.ts              <span class="c"># paths · EXPECTED_SKILLS · AGENT_MODEL</span>
+│     ├─ agent.ts               <span class="c"># query() wrapper · runTurn · probeSkills</span>
+│     ├─ auth.ts                <span class="c"># checkClaudeAuth (subscription probe)</span>
+│     ├─ sessions.ts            <span class="c"># in-memory SessionState · output dirs</span>
+│     ├─ artifacts.ts           <span class="c"># detectArtifacts · artifactUrl</span>
+│     ├─ sse.ts                 <span class="c"># SSE writer + heartbeat</span>
+│     └─ routes/                <span class="c"># chat · auth · artifact · upload</span>
+│
+├─ output/&lt;sessionId&gt;/          <span class="c"># generated reports + uploads/ (on disk)</span>
+└─ CLAUDE.md                    <span class="c"># build/run guidance for this app</span></pre>
+    <p class="note">
+      The report <strong>skills</strong> themselves live one level up in
+      <code>../.claude/skills/</code> (<code>lucapath</code>, <code>personal-destiny-report</code>,
+      <code>family-report</code>, <code>children-ai-report</code>, <code>business-partner-report</code>).
+      This app only invokes them through the SDK; it does not contain their logic.
+    </p>
+  </section>
+
+  <footer>
+    LucaPath Studio · 路卡成长罗盘 — local chat app on your Claude subscription · architecture overview
+  </footer>
+
+</div>
+</body>
+</html>

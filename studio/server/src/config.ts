@@ -9,6 +9,10 @@ export const OUTPUT_ROOT = path.join(STUDIO_DIR, 'output');
 
 export const PORT = Number(process.env.PORT ?? 8787);
 
+// Model the agent runs on. Pinned (rather than the CLI default, which is currently
+// Sonnet 4.5) so behaviour and the in-app model badge are explicit. Override via env.
+export const AGENT_MODEL = process.env.AGENT_MODEL ?? 'claude-sonnet-4-6';
+
 // The skills we expect the Agent SDK to discover from PROJECT_ROOT/.claude/skills
 export const EXPECTED_SKILLS = [
   'lucapath',

@@ -33,6 +33,31 @@
   --garamond: 'Cormorant Garamond', serif;
 }
 
+/* ── Light theme — warm paper / ink, keeps the gold identity ── */
+:root[data-theme='light'] {
+  /* surfaces */
+  --bg: #f6f2e9;
+  --bg2: #efe9db;
+  --surf: #ebe4d3;
+  --card: #fffdf7;
+  --card2: #f3ecdd;
+  /* borders */
+  --b: rgba(150, 118, 36, 0.20);
+  --b2: rgba(150, 118, 36, 0.34);
+  --b3: rgba(30, 36, 50, 0.10);
+  /* gold (darkened for contrast on light) */
+  --gold: #a87f24;
+  --gl: #8c6716;
+  --gf: rgba(168, 127, 36, 0.10);
+  --gf2: rgba(168, 127, 36, 0.18);
+  /* ink text (replaces cream) */
+  --w: rgba(28, 33, 46, 0.94);
+  --w8: rgba(28, 33, 46, 0.80);
+  --w6: rgba(28, 33, 46, 0.58);
+  --w4: rgba(28, 33, 46, 0.42);
+  --w2: rgba(28, 33, 46, 0.16);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -52,6 +77,7 @@ body {
   font-size: 14px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 button {
@@ -197,14 +223,22 @@ button {
 
 /* ─────────────── STUDIO LAYOUT ─────────────── */
 .studio {
+  --drawer-w: min(560px, 46vw);
   height: 100%;
   display: grid;
-  grid-template-columns: 280px 1fr 460px;
+  grid-template-columns: 280px 1fr;
 }
 @media (max-width: 1100px) {
   .studio {
-    grid-template-columns: 240px 1fr 400px;
+    grid-template-columns: 240px 1fr;
   }
+}
+/* when the preview drawer is open, reflow the chat into the remaining width */
+.chat {
+  transition: margin-right 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.studio.drawer-open .chat {
+  margin-right: var(--drawer-w);
 }
 
 /* ── Sidebar ── */
@@ -339,6 +373,9 @@ button {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  min-height: 0; /* let .messages scroll instead of growing the column */
+  height: 100%;
+  position: relative;
   background: var(--bg);
 }
 .chat-head {
@@ -354,6 +391,11 @@ button {
   font-weight: 500;
   color: var(--w8);
 }
+.chat-head-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
 .status-indicator {
   display: flex;
   align-items: center;
@@ -361,6 +403,23 @@ button {
   font-family: var(--mono);
   font-size: 11px;
   color: var(--w4);
+}
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 0.5px solid var(--b2);
+  background: transparent;
+  color: var(--w6);
+  flex-shrink: 0;
+  transition: background 0.12s, color 0.12s;
+}
+.theme-toggle:hover {
+  background: var(--gf);
+  color: var(--gl);
 }
 .status-dot {
   width: 7px;
@@ -509,24 +568,31 @@ button {
   font-size: 12.5px;
   max-width: 380px;
 }
-/* composer */
+/* composer — pinned to the bottom of the chat column (does not scroll) */
 .composer {
+  flex-shrink: 0;
   padding: 14px 24px 20px;
   border-top: 0.5px solid var(--b3);
 }
 .composer-inner {
+  position: relative;
   max-width: 760px;
   margin: 0 auto;
   background: var(--card);
   border: 0.5px solid var(--b2);
-  border-radius: 14px;
-  padding: 10px 12px;
+  border-radius: 16px;
+  padding: 12px 14px 10px;
   display: flex;
-  align-items: flex-end;
-  gap: 10px;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.composer-inner.dragover {
+  border-color: var(--gold);
+  background: var(--gf2);
 }
 .composer textarea {
-  flex: 1;
+  width: 100%;
   background: transparent;
   border: none;
   resize: none;
@@ -540,13 +606,241 @@ button {
 .composer textarea::placeholder {
   color: var(--w4);
 }
+
+/* bottom toolbar: attach on the left, model/effort + send on the right */
+.composer-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.composer-left,
+.composer-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.attach-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 0.5px solid var(--b2);
+  background: transparent;
+  color: var(--w6);
+  font-size: 19px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.attach-btn:hover:not(:disabled) {
+  background: var(--gf);
+  border-color: var(--b2);
+  color: var(--gl);
+}
+.attach-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* drawer toggle in the composer toolbar */
+.panel-btn {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 0.5px solid var(--b2);
+  background: transparent;
+  color: var(--w6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.12s, color 0.12s;
+}
+.panel-btn:hover:not(:disabled) {
+  background: var(--gf);
+  color: var(--gl);
+}
+.panel-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.panel-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  border-radius: 8px;
+  background: var(--gold);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* inline file-preview cards in chat */
+.file-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+.file-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  background: var(--card);
+  border: 0.5px solid var(--b2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.13s, border-color 0.13s;
+}
+.file-card:hover {
+  background: var(--card2);
+  border-color: var(--b2);
+}
+.file-card-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  background: var(--surf);
+  border: 0.5px solid var(--b3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+}
+.file-card-meta {
+  flex: 1;
+  min-width: 0;
+}
+.file-card-title {
+  font-size: 13.5px;
+  color: var(--w);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.file-card-sub {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--w4);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+.file-card-open {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--w8);
+  background: var(--surf);
+  border: 0.5px solid var(--b2);
+  border-radius: 8px;
+  padding: 7px 12px;
+  white-space: nowrap;
+  transition: background 0.13s, color 0.13s;
+}
+.file-card-open:hover {
+  background: var(--gf);
+  color: var(--gl);
+}
+.model-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--w4);
+  user-select: none;
+}
+.model-name {
+  color: var(--w6);
+}
+.model-dot {
+  color: var(--w2);
+}
+.model-effort {
+  color: var(--w4);
+}
+
+/* attachment chips */
+.attach-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.attach-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 220px;
+  font-size: 11.5px;
+  color: var(--w8);
+  background: var(--surf);
+  border: 0.5px solid var(--b3);
+  border-radius: 8px;
+  padding: 4px 6px 4px 8px;
+}
+.attach-icon {
+  font-size: 12px;
+  line-height: 1;
+}
+.attach-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.attach-x {
+  background: transparent;
+  border: none;
+  color: var(--w4);
+  font-size: 15px;
+  line-height: 1;
+  padding: 0 2px;
+  cursor: pointer;
+}
+.attach-x:hover {
+  color: var(--gl);
+}
+
+/* drag-over overlay */
+.drop-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: rgba(200, 160, 60, 0.12);
+  border: 1.5px dashed var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--gl);
+  pointer-events: none;
+}
+
 .send-btn {
   background: linear-gradient(135deg, var(--gold), var(--gl));
   color: var(--bg);
   border: none;
   border-radius: 9px;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   font-size: 16px;
   display: flex;
   align-items: center;
@@ -571,13 +865,45 @@ button {
   letter-spacing: 0.05em;
 }
 
-/* ── Artifact panel ── */
-.artifact {
+/* ── Artifact drawer (slides in from the right) ── */
+.artifact-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: var(--drawer-w, min(560px, 46vw));
   background: var(--bg2);
   border-left: 0.5px solid var(--b2);
+  box-shadow: -24px 0 60px rgba(0, 0, 0, 0.45);
   display: flex;
   flex-direction: column;
   min-width: 0;
+  z-index: 40;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.artifact-drawer.open {
+  transform: translateX(0);
+}
+.artifact-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  border: 0.5px solid var(--b3);
+  background: transparent;
+  color: var(--w6);
+  font-size: 13px;
+  line-height: 1;
+  transition: background 0.12s, color 0.12s;
+}
+.artifact-icon-btn:hover {
+  background: var(--gf);
+  color: var(--gl);
 }
 .artifact-head {
   display: flex;

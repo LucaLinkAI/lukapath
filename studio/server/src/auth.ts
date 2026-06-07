@@ -1,7 +1,8 @@
 import { query } from '@anthropic-ai/claude-agent-sdk';
 import type { Options, SDKMessage } from '@anthropic-ai/claude-agent-sdk';
+import { AGENT_MODEL } from './config.ts';
 
-type AuthResult = { ok: boolean; reason?: string; apiKeySource?: string };
+type AuthResult = { ok: boolean; reason?: string; apiKeySource?: string; model?: string };
 
 let cache: { at: number; result: AuthResult } | null = null;
 const TTL = 30_000;
@@ -16,6 +17,7 @@ export async function checkClaudeAuth(force = false): Promise<AuthResult> {
 
   const options: Options = {
     maxTurns: 1,
+    model: AGENT_MODEL,
     tools: { type: 'preset', preset: 'claude_code' },
     settingSources: [], // don't need skills for the probe
   };
@@ -26,7 +28,7 @@ export async function checkClaudeAuth(force = false): Promise<AuthResult> {
     result = { ok: true };
     for await (const m of it) {
       if (m.type === 'system' && m.subtype === 'init') {
-        result = { ok: true, apiKeySource: m.apiKeySource };
+        result = { ok: true, apiKeySource: m.apiKeySource, model: m.model };
       }
       if (m.type === 'assistant' && (m as any).error === 'authentication_failed') {
         result = { ok: false, reason: 'not_logged_in' };

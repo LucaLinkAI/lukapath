@@ -1,7 +1,43 @@
-import type { SSEEvent, AuthStatus } from '../types';
+import type { SSEEvent, AuthStatus, UploadResult } from '../types';
 
 export async function fetchAuthStatus(force = false): Promise<AuthStatus> {
   const r = await fetch(`/api/auth/status${force ? '?force=1' : ''}`);
+  return r.json();
+}
+
+/** Read a File as a base64 string (no data: prefix). */
+export function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = String(reader.result);
+      resolve(result.includes(',') ? result.slice(result.indexOf(',') + 1) : result);
+    };
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
+
+/** Upload attachments into the session's uploads dir; returns saved absolute paths. */
+export async function uploadFiles(sessionId: string | undefined, files: File[]): Promise<UploadResult> {
+  const encoded = await Promise.all(
+    files.map(async (f) => ({ name: f.name, dataBase64: await fileToBase64(f) })),
+  );
+  const r = await fetch('/api/upload', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ sessionId, files: encoded }),
+  });
+  if (!r.ok) {
+    let message = `上传失败 (${r.status})`;
+    try {
+      const j = await r.json();
+      if (j?.error) message = j.error;
+    } catch {
+      /* ignore */
+    }
+    throw new Error(message);
+  }
   return r.json();
 }
 
