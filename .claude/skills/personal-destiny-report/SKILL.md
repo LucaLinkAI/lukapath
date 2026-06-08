@@ -188,7 +188,14 @@ Save it in the current project directory or working directory.
 **Report sections** (in order):
 壹 Overview → 贰 Career → 叁 Wealth → 肆 Relationships → 伍 Life Cycles → **陆 命盘骨架·十神·神煞** → 柒 Comparison Table → Final Insight → Footer
 
-**Section 壹 (四套命理系统总览)** — after the four sys-cards and before the cross-system callout, render the BaZi Quick-Reference Summary Row (see skeleton in `references/html-sections.md`):
+**Section 壹 (四套命理系统总览)** — the 八字 sys-card's info block (格局/神煞 area) now has three lines — fill them as follows:
+- **格局 line**: `格局：PATTERN_NAME · STRENGTH · 喜/用FAVORABLE_ELEMENT` — STRENGTH is 身强/身弱/偏弱/极弱 in plain text
+- **日主强度 line**: `日主强度：STRENGTH_LABEL（SCORE/8） · 用神方向：YONGSHEN_DIRECTION`
+  - STRENGTH_LABEL + STRENGTH_COLOR: 身强 → green `#3a9060`; 身弱/偏弱 → amber `#a07828`; 极弱 → red `#c04030`
+  - SCORE/8: count how many of the 8 characters (4 stems + 4 branches) support or strengthen the Day Master; express as n/8 (e.g., 5/8)
+  - YONGSHEN_DIRECTION: one concise sentence naming the favorable element(s) and the life/talent dimension they unlock — e.g., "水木为喜，调和金旺、引出表达力" or "火土为用，补弱扶身、激活行动力"
+- **神煞 line**: tag badges as before
+- After the four sys-cards and before the cross-system callout, render the BaZi Quick-Reference Summary Row (see skeleton in `references/html-sections.md`):
 - Single-row table with 7 columns: 人 | 日主 | 五行阴阳 | 用的格局 | 日主强度 | 材质感 | 核心关键词
 - 日主: two-char stem+element (e.g., 壬水)
 - 五行阴阳: yin/yang + element (阳 for 甲丙戊庚壬; 阴 for 乙丁己辛癸) + element name (e.g., 阳水)

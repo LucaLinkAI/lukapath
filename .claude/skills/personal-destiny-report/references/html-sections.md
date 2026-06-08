@@ -111,6 +111,7 @@ Use these as exact structural templates. Replace ALL_CAPS placeholders with gene
         </div>
         <div style="font-size:12px;color:var(--w6);margin-top:8px;line-height:1.7">
           格局：<span style="color:var(--bazil)">PATTERN_NAME</span> · STRENGTH · 喜/用FAVORABLE_ELEMENT<br>
+          日主强度：<span style="color:STRENGTH_COLOR">STRENGTH_LABEL（SCORE/8）</span> · 用神方向：YONGSHEN_DIRECTION<br>
           神煞：<span class="tag tag-bazi">SHENSHAS</span>
         </div>
       </div>
