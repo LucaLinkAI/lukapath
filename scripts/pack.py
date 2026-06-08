@@ -72,7 +72,7 @@ def make_plugin_dir(skills: list[Path], plugin_name: str, out_dir: Path) -> Path
     meta_dir.mkdir()
     plugin_json = {
         "name": plugin_name,
-        "version": "1.0.2",
+        "version": "1.0.3",
         "description": (
             "路卡命运罗盘 — Chinese family destiny analysis: "
             "individual BaZi/MBTI/astrology reports, family compatibility, "
