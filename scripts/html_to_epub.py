@@ -5,8 +5,9 @@ import re
 from pathlib import Path
 from ebooklib import epub
 
-SRC = Path(__file__).parent.parent / "bazi_orange_book.html"
-OUT = Path(__file__).parent.parent / "bazi_orange_book.epub"
+PUBLISH = Path(__file__).parent.parent / "Publish"
+SRC = PUBLISH / "bazi_orange_book.html"
+OUT = PUBLISH / "bazi_orange_book.epub"
 
 raw = SRC.read_text(encoding="utf-8")
 
@@ -15,14 +16,10 @@ css_match = re.search(r"<style>(.*?)</style>", raw, re.DOTALL)
 css_text = css_match.group(1) if css_match else ""
 
 # Strip sidebar / nav / overlay / progress-bar / JS — epub doesn't need them.
-# Keep only semantic section content.
 STRIP_IDS = ["progress-bar", "overlay", "sidebar", "topbar"]
 for sid in STRIP_IDS:
-    css_text = re.sub(
-        rf"#?{sid}\s*\{{[^}}]*\}}", "", css_text
-    )
+    css_text = re.sub(rf"#?{sid}\s*\{{[^}}]*\}}", "", css_text)
 
-# Minimal resets for epub readers + keep color / typography vars
 EPUB_CSS = """
 @charset "UTF-8";
 """ + css_text + """
@@ -31,6 +28,7 @@ body { margin: 1.2em 1.4em; background: #faf8f5; }
 #main { margin-left: 0; }
 .chapter { max-width: 100%; padding: 2em 0; border-bottom: 1px solid #e7e5e4; }
 #cover  { max-width: 100%; padding: 2em 0; }
+#cover-splash img { width: 100%; height: auto; display: block; }
 """
 
 # ── Extract <section> blocks ──────────────────────────────────────────────────
@@ -40,6 +38,7 @@ sections = re.findall(
 )
 
 TITLES = {
+    "cover-splash": "封面插图",
     "cover": "封面 · 总览与公式",
     "ch1":  "第一章 · 八字命理到底是什么？",
     "ch2":  "第二章 · 四柱、天干、地支",
@@ -67,6 +66,17 @@ style = epub.EpubItem(
     content=EPUB_CSS.encode("utf-8"),
 )
 book.add_item(style)
+
+# ── Embed BookCover.svg ───────────────────────────────────────────────────────
+svg_path = PUBLISH / "BookCover.svg"
+if svg_path.exists():
+    cover_img = epub.EpubItem(
+        uid="cover-image",
+        file_name="BookCover.svg",
+        media_type="image/svg+xml",
+        content=svg_path.read_bytes(),
+    )
+    book.add_item(cover_img)
 
 chapters = []
 for sec_id, body in sections:

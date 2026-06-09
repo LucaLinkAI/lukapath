@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="680" height="960" viewBox="0, 0, 680, 960">
+  <g id="Layer_1">
+    <path d="M0,0 L680,0 L680,960 L0,960 z" fill="#F2E6DA"/>
+    <path d="M46,26 L76,26 C81.523,26 86,30.477 86,36 L86,66 C86,71.523 81.523,76 76,76 L46,76 C40.477,76 36,71.523 36,66 L36,36 C36,30.477 40.477,26 46,26 z" fill-opacity="0" stroke="#C4643C" stroke-width="1.8"/>
+    <path d="M61,35 L62.9,46.4 L72.3,39.7 L65.6,49.1 L77,51 L65.6,52.9 L72.3,62.3 L62.9,55.6 L61,67 L59.1,55.6 L49.7,62.3 L56.4,52.9 L45,51 L56.4,49.1 L49.7,39.7 L59.1,46.4 z" fill="#C4643C"/>
+    <text transform="matrix(1, 0, 0, 1, 189.353, 41.5)">
+      <tspan x="-92.353" y="4.5" font-family="PingFangSC-Regular" font-size="14.5" fill="#2D1A0E">命运罗盘</tspan>
+      <tspan x="-34.353" y="4.5" font-family="Helvetica" font-size="14.5" fill="#2D1A0E"> / Destiny Compass</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 133.687, 62.5)">
+      <tspan x="-36.687" y="3.5" font-family="Helvetica" font-size="11.5" fill="#7A5845">AI </tspan>
+      <tspan x="-22.627" y="3.5" font-family="PingFangSC-Regular" font-size="11.5" fill="#7A5845">命理指南</tspan>
+      <tspan x="23.373" y="3.5" font-family="Helvetica" font-size="11.5" fill="#7A5845"> </tspan>
+      <tspan x="26.568" y="3.5" font-family="ZapfDingbatsITC" font-size="11.5" fill="#7A5845">✦</tspan>
+    </text>
+    <g>
+      <path d="M556,22 L556,90" fill="#000000"/>
+      <path d="M556,22 L556,90" fill-opacity="0" stroke="#C8A88A" stroke-width="1.2"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 588, 42)">
+      <tspan x="-20" y="4" font-family="PingFangSC-Regular" font-size="13" fill="#2D1A0E">作者：</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 590.946, 62.5)">
+      <tspan x="-22.946" y="4.5" font-family="Helvetica" font-size="14" fill="#2D1A0E">Jeff Lin</tspan>
+    </text>
+    <g>
+      <path d="M36,102 L644,102" fill="#000000"/>
+      <path d="M36,102 L644,102" fill-opacity="0" stroke="#C8A88A" stroke-width="1"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 276.5, 179)">
+      <tspan x="-232.5" y="41" font-family="WeibeiTC-Bold" font-size="116" fill="#1A0C06">八字命理</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 308.5, 297)">
+      <tspan x="-264.5" y="2" font-family="WeibeiSC-Bold" font-size="60" fill="#1A0C06">从入门到精通</tspan>
+    </text>
+    <path d="M57.885,329 L391.115,329 C398.784,329 405,329.895 405,331 L405,331 C405,332.105 398.784,333 391.115,333 L57.885,333 C50.216,333 44,332.105 44,331 L44,331 C44,329.895 50.216,329 57.885,329 z" fill="#C4643C"/>
+    <text transform="matrix(1, 0, 0, 1, 208.755, 389)">
+      <tspan x="-164.755" y="-8" font-family="PingFangSC-Regular" font-size="21" fill="#2D1A0E">定义</tspan>
+      <tspan x="-122.755" y="-8" font-family="Helvetica" font-size="21" fill="#2D1A0E"> </tspan>
+      <tspan x="-116.92" y="-8" font-family="Helvetica" font-size="21" fill="#FF6300">·</tspan>
+      <tspan x="-111.086" y="-8" font-family="Helvetica" font-size="21" fill="#2D1A0E"> </tspan>
+      <tspan x="-105.251" y="-8" font-family="PingFangSC-Regular" font-size="21" fill="#2D1A0E">解读</tspan>
+      <tspan x="-63.251" y="-8" font-family="Helvetica" font-size="21" fill="#2D1A0E"> </tspan>
+      <tspan x="-57.417" y="-8" font-family="Helvetica" font-size="21" fill="#FF6300">· </tspan>
+      <tspan x="-45.748" y="-8" font-family="PingFangSC-Regular" font-size="21" fill="#2D1A0E">案例</tspan>
+      <tspan x="-3.748" y="-8" font-family="Helvetica" font-size="21" fill="#2D1A0E"> </tspan>
+      <tspan x="2.087" y="-8" font-family="Helvetica" font-size="21" fill="#FF6300">· </tspan>
+      <tspan x="13.756" y="-8" font-family="PingFangSC-Regular" font-size="21" fill="#2D1A0E">速查表</tspan>
+    </text>
+    <g>
+      <text transform="matrix(1, 0, 0, 1, 177, 503.5)">
+        <tspan x="-132" y="-51.58" font-family="PingFangSC-Regular" font-size="21" fill="#3D2010">用现代视角理解传统命理，</tspan>
+        <tspan x="-132" y="-16.78" font-family="PingFangSC-Regular" font-size="21" fill="#3D2010">结合</tspan>
+        <tspan x="-90" y="-16.78" font-family="Helvetica" font-size="21" fill="#3D2010"> AI </tspan>
+        <tspan x="-59.638" y="-16.78" font-family="PingFangSC-Regular" font-size="21" fill="#3D2010">智能分析，</tspan>
+        <tspan x="-132" y="18.02" font-family="PingFangSC-Regular" font-size="21" fill="#3D2010">快速掌握八字核心逻辑。</tspan>
+      </text>
+    </g>
+    <g>
+      <path d="M36,902 L644,902" fill="#000000"/>
+      <path d="M36,902 L644,902" fill-opacity="0" stroke="#C8A88A" stroke-width="1"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 159.738, 925)">
+      <tspan x="-115.738" y="4" font-family="ZapfDingbatsITC" font-size="13.5" fill="#7A5845">✦</tspan>
+      <tspan x="-105.033" y="4" font-family="Helvetica" font-size="13.5" fill="#7A5845"> AI </tspan>
+      <tspan x="-85.514" y="4" font-family="PingFangSC-Regular" font-size="13.5" fill="#7A5845">赋能传统智慧</tspan>
+      <tspan x="-4.514" y="4" font-family="Helvetica" font-size="13.5" fill="#7A5845"> · </tspan>
+      <tspan x="6.738" y="4" font-family="PingFangSC-Regular" font-size="13.5" fill="#7A5845">让命理学习更简单</tspan>
+    </text>
+    <path d="M235.5,631 L247.5,625.5 L247.5,636.5 z" fill="#7A6858"/>
+    <path d="M622.5,631.5 C622.5,726.493 545.493,803.5 450.5,803.5 C355.507,803.5 278.5,726.493 278.5,631.5 C278.5,536.507 355.507,459.5 450.5,459.5 C545.493,459.5 622.5,536.507 622.5,631.5 z" fill-opacity="0" stroke="#C8A88A" stroke-width="1" stroke-dasharray="3,5.5"/>
+    <path d="M602.5,631 C602.5,714.947 534.447,783 450.5,783 C366.553,783 298.5,714.947 298.5,631 C298.5,547.053 366.553,479 450.5,479 C534.447,479 602.5,547.053 602.5,631 z" fill-opacity="0" stroke="#C8A88A" stroke-width="0.8" stroke-dasharray="2,4"/>
+    <path d="M580.5,631 C580.5,702.797 522.297,761 450.5,761 C378.703,761 320.5,702.797 320.5,631 C320.5,559.203 378.703,501 450.5,501 C522.297,501 580.5,559.203 580.5,631 z" fill-opacity="0" stroke="#C8A88A" stroke-width="1.3"/>
+    <path d="M504.5,631 C504.5,660.823 480.323,685 450.5,685 C420.677,685 396.5,660.823 396.5,631 C396.5,601.177 420.677,577 450.5,577 C480.323,577 504.5,601.177 504.5,631 z" fill-opacity="0" stroke="#C4643C" stroke-width="1.6"/>
+    <g>
+      <path d="M450.5,459 L450.5,428" fill="#000000"/>
+      <path d="M450.5,459 L450.5,428" fill-opacity="0" stroke="#7A6858" stroke-width="1.5"/>
+    </g>
+    <path d="M450.5,417 L445,429 L456,429 z" fill="#7A6858"/>
+    <g>
+      <path d="M450.5,803 L450.5,834" fill="#000000"/>
+      <path d="M450.5,803 L450.5,834" fill-opacity="0" stroke="#7A6858" stroke-width="1.5"/>
+    </g>
+    <path d="M450.5,842 L445,830 L456,830 z" fill="#7A6858"/>
+    <g>
+      <path d="M278.5,631 L247.5,631" fill="#000000"/>
+      <path d="M278.5,631 L247.5,631" fill-opacity="0" stroke="#7A6858" stroke-width="1.5"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 450.5, 405.5)">
+      <tspan x="-15" y="4.5" font-family="PingFangSC-Regular" font-size="15" fill="#2D1A0E">年柱</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 450.5, 861)">
+      <tspan x="-15" y="4.5" font-family="PingFangSC-Regular" font-size="15" fill="#2D1A0E">日柱</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 245.5, 613.5)">
+      <tspan x="-14.5" y="4.5" font-family="PingFangSC-Regular" font-size="15" fill="#2D1A0E">时柱</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 658, 614.5)">
+      <tspan x="-15.5" y="4.5" font-family="PingFangSC-Regular" font-size="15" fill="#2D1A0E">月柱</tspan>
+    </text>
+    <path d="M454.5,459 C454.5,461.209 452.709,463 450.5,463 C448.291,463 446.5,461.209 446.5,459 C446.5,456.791 448.291,455 450.5,455 C452.709,455 454.5,456.791 454.5,459 z" fill="#C4643C"/>
+    <path d="M454.5,803 C454.5,805.209 452.709,807 450.5,807 C448.291,807 446.5,805.209 446.5,803 C446.5,800.791 448.291,799 450.5,799 C452.709,799 454.5,800.791 454.5,803 z" fill="#C4643C"/>
+    <path d="M282.5,631 C282.5,633.209 280.709,635 278.5,635 C276.291,635 274.5,633.209 274.5,631 C274.5,628.791 276.291,627 278.5,627 C280.709,627 282.5,628.791 282.5,631 z" fill="#C4643C"/>
+    <path d="M587.946,521.5 C587.946,523.433 586.379,525 584.446,525 C582.513,525 580.946,523.433 580.946,521.5 C580.946,519.567 582.513,518 584.446,518 C586.379,518 587.946,519.567 587.946,521.5 z" fill="#C4643C" opacity="0.75"/>
+    <path d="M587.946,740.5 C587.946,742.433 586.379,744 584.446,744 C582.513,744 580.946,742.433 580.946,740.5 C580.946,738.567 582.513,737 584.446,737 C586.379,737 587.946,738.567 587.946,740.5 z" fill="#C4643C" opacity="0.75"/>
+    <path d="M320.5,521.5 C320.5,523.157 319.157,524.5 317.5,524.5 C315.843,524.5 314.5,523.157 314.5,521.5 C314.5,519.843 315.843,518.5 317.5,518.5 C319.157,518.5 320.5,519.843 320.5,521.5 z" fill="#C4643C" opacity="0.6"/>
+    <g>
+      <path d="M624.892,631 L655.892,631" fill="#000000"/>
+      <path d="M624.892,631 L655.892,631" fill-opacity="0" stroke="#7A6858" stroke-width="1.5"/>
+    </g>
+    <path d="M665.5,631 L653.5,625.5 L653.5,636.5 z" fill="#7A6858"/>
+    <path d="M625.392,631.5 C625.392,633.709 623.601,635.5 621.392,635.5 C619.182,635.5 617.392,633.709 617.392,631.5 C617.392,629.291 619.182,627.5 621.392,627.5 C623.601,627.5 625.392,629.291 625.392,631.5 z" fill="#C4643C"/>
+    <path d="M320.5,741 C320.5,742.657 319.157,744 317.5,744 C315.843,744 314.5,742.657 314.5,741 C314.5,739.343 315.843,738 317.5,738 C319.157,738 320.5,739.343 320.5,741 z" fill="#C4643C" opacity="0.6"/>
+    <g>
+      <path d="M64.5,638.5 C64.5,640.985 62.485,643 60,643 C57.515,643 55.5,640.985 55.5,638.5 C55.5,636.015 57.515,634 60,634 C62.485,634 64.5,636.015 64.5,638.5 z" fill="#C4643C"/>
+      <path d="M76,638.5 C76,642.09 68.837,645 60,645 C51.163,645 44,642.09 44,638.5 C44,634.91 51.163,632 60,632 C68.837,632 76,634.91 76,638.5 z" fill-opacity="0" stroke="#C4643C" stroke-width="1.5"/>
+      <path d="M68,652.356 C64.891,654.151 58.789,649.403 54.371,641.75 C49.953,634.097 48.891,626.439 52,624.644 C55.109,622.849 61.211,627.597 65.629,635.25 C70.047,642.903 71.109,650.561 68,652.356 z" fill-opacity="0" stroke="#C4643C" stroke-width="1.5"/>
+      <path d="M68,624.644 C71.109,626.439 70.047,634.097 65.629,641.75 C61.211,649.403 55.109,654.151 52,652.356 C48.891,650.561 49.953,642.903 54.371,635.25 C58.789,627.597 64.891,622.849 68,624.644 z" fill-opacity="0" stroke="#C4643C" stroke-width="1.5"/>
+      <text transform="matrix(1, 0, 0, 1, 114.5, 630)">
+        <tspan x="-28.5" y="4.5" font-family="PingFangSC-Semibold" font-size="14" fill="#1A0C06">智能解读</tspan>
+      </text>
+      <text transform="matrix(1, 0, 0, 1, 141.836, 648)">
+        <tspan x="-55.836" y="3.5" font-family="Helvetica" font-size="12" fill="#7A5845">AI </tspan>
+        <tspan x="-41.164" y="3.5" font-family="PingFangSC-Regular" font-size="12" fill="#7A5845">深度解析命局结构</tspan>
+      </text>
+      <text transform="matrix(1, 0, 0, 1, 116.5, 663)">
+        <tspan x="-30.5" y="3.5" font-family="PingFangSC-Regular" font-size="12" fill="#7A5845">与运势趋势</tspan>
+      </text>
+      <path d="M60,708.5 L76,715.5 L60,722.5 L44,715.5 z" fill-opacity="0" stroke="#C4643C" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M44,722.5 L60,729.5 L76,722.5" fill-opacity="0" stroke="#C4643C" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M44,729.5 L60,736.5 L76,729.5" fill-opacity="0" stroke="#C4643C" stroke-width="1.5" stroke-linejoin="round"/>
+      <text transform="matrix(1, 0, 0, 1, 114.5, 712)">
+        <tspan x="-28.5" y="4.5" font-family="PingFangSC-Semibold" font-size="14" fill="#1A0C06">结构清晰</tspan>
+      </text>
+      <text transform="matrix(1, 0, 0, 1, 146.5, 730)">
+        <tspan x="-60.5" y="3.5" font-family="PingFangSC-Regular" font-size="12" fill="#7A5845">四柱、十神、五行关系</tspan>
+      </text>
+      <text transform="matrix(1, 0, 0, 1, 110.5, 745)">
+        <tspan x="-24.5" y="3.5" font-family="PingFangSC-Regular" font-size="12" fill="#7A5845">一目了然</tspan>
+      </text>
+      <path d="M69.5,797.5 C69.5,804.404 63.904,810 57,810 C50.096,810 44.5,804.404 44.5,797.5 C44.5,790.596 50.096,785 57,785 C63.904,785 69.5,790.596 69.5,797.5 z" fill-opacity="0" stroke="#C4643C" stroke-width="1.5"/>
+      <g>
+        <path d="M66,806.5 L77,817.5" fill="#000000"/>
+        <path d="M66,806.5 L77,817.5" fill-opacity="0" stroke="#C4643C" stroke-width="2.2" stroke-linecap="round"/>
+      </g>
+      <text transform="matrix(1, 0, 0, 1, 114.5, 790)">
+        <tspan x="-28.5" y="4.5" font-family="PingFangSC-Semibold" font-size="14" fill="#1A0C06">快速查询</tspan>
+      </text>
+      <text transform="matrix(1, 0, 0, 1, 134.5, 808)">
+        <tspan x="-48.5" y="3.5" font-family="PingFangSC-Regular" font-size="12" fill="#7A5845">速查表与案例结合</tspan>
+      </text>
+      <text transform="matrix(1, 0, 0, 1, 110.5, 823)">
+        <tspan x="-24.5" y="3.5" font-family="PingFangSC-Regular" font-size="12" fill="#7A5845">即学即用</tspan>
+      </text>
+      <g>
+        <path d="M45,773 L201,773" fill="#000000"/>
+        <path d="M45,773 L201,773" fill-opacity="0" stroke="#C8A88A" stroke-width="1"/>
+      </g>
+      <g>
+        <path d="M50.217,685.5 L206.217,685.5" fill="#000000"/>
+        <path d="M50.217,685.5 L206.217,685.5" fill-opacity="0" stroke="#C8A88A" stroke-width="1"/>
+      </g>
+    </g>
+    <g>
+      <path d="M450.5,807 L450.5,463" fill="#000000"/>
+      <path d="M450.5,807 L450.5,463" fill-opacity="0" stroke="#C8A88A" stroke-width="1"/>
+    </g>
+    <path d="M453.5,546.5 C453.5,548.157 452.157,549.5 450.5,549.5 C448.843,549.5 447.5,548.157 447.5,546.5 C447.5,544.843 448.843,543.5 450.5,543.5 C452.157,543.5 453.5,544.843 453.5,546.5 z" fill="#C4643C" opacity="0.6"/>
+    <path d="M358.5,628 C358.5,629.657 357.157,631 355.5,631 C353.843,631 352.5,629.657 352.5,628 C352.5,626.343 353.843,625 355.5,625 C357.157,625 358.5,626.343 358.5,628 z" fill="#C4643C" opacity="0.6"/>
+    <path d="M549,631 C549,632.657 547.657,634 546,634 C544.343,634 543,632.657 543,631 C543,629.343 544.343,628 546,628 C547.657,628 549,629.343 549,631 z" fill="#C4643C" opacity="0.6"/>
+    <g>
+      <g>
+        <path d="M471.5,528.5 C471.5,540.098 462.098,549.5 450.5,549.5 C438.902,549.5 429.5,540.098 429.5,528.5 C429.5,516.902 438.902,507.5 450.5,507.5 C462.098,507.5 471.5,516.902 471.5,528.5 z" fill="#F2E6DA"/>
+        <path d="M471.5,528.5 C471.5,540.098 462.098,549.5 450.5,549.5 C438.902,549.5 429.5,540.098 429.5,528.5 C429.5,516.902 438.902,507.5 450.5,507.5 C462.098,507.5 471.5,516.902 471.5,528.5 z" fill-opacity="0" stroke="#C8A88A" stroke-width="1.2"/>
+      </g>
+      <text transform="matrix(1, 0, 0, 1, 450.5, 528.5)">
+        <tspan x="-8.5" y="5.5" font-family="PingFangSC-Regular" font-size="17" fill="#2D1A0E">木</tspan>
+      </text>
+    </g>
+    <g>
+      <g>
+        <path d="M405,732 C405,743.598 395.598,753 384,753 C372.402,753 363,743.598 363,732 C363,720.402 372.402,711 384,711 C395.598,711 405,720.402 405,732 z" fill="#F2E6DA"/>
+        <path d="M405,732 C405,743.598 395.598,753 384,753 C372.402,753 363,743.598 363,732 C363,720.402 372.402,711 384,711 C395.598,711 405,720.402 405,732 z" fill-opacity="0" stroke="#C8A88A" stroke-width="1.2"/>
+      </g>
+      <text transform="matrix(1, 0, 0, 1, 384, 732.5)">
+        <tspan x="-8.5" y="5.5" font-family="PingFangSC-Regular" font-size="17" fill="#2D1A0E">金</tspan>
+      </text>
+    </g>
+    <g>
+      <g>
+        <path d="M526.75,732 C526.75,743.598 517.348,753 505.75,753 C494.152,753 484.75,743.598 484.75,732 C484.75,720.402 494.152,711 505.75,711 C517.348,711 526.75,720.402 526.75,732 z" fill="#F2E6DA"/>
+        <path d="M526.75,732 C526.75,743.598 517.348,753 505.75,753 C494.152,753 484.75,743.598 484.75,732 C484.75,720.402 494.152,711 505.75,711 C517.348,711 526.75,720.402 526.75,732 z" fill-opacity="0" stroke="#C8A88A" stroke-width="1.2"/>
+      </g>
+      <text transform="matrix(1, 0, 0, 1, 505.75, 732.5)">
+        <tspan x="-8.5" y="5.5" font-family="PingFangSC-Regular" font-size="17" fill="#2D1A0E">土</tspan>
+      </text>
+    </g>
+    <g>
+      <path d="M282.5,631.25 L613.892,631.75" fill="#000000"/>
+      <path d="M282.5,631.25 L613.892,631.75" fill-opacity="0" stroke="#C8A88A" stroke-width="1"/>
+    </g>
+    <path d="M450.5,587.5 L456.6,616.7 L481.6,600.4 L465.3,625.4 L494.5,631.5 L465.3,637.6 L481.6,662.6 L456.6,646.3 L450.5,675.5 L444.4,646.3 L419.4,662.6 L435.7,637.6 L406.5,631.5 L435.7,625.4 L419.4,600.4 L444.4,616.7 z" fill="#C4643C"/>
+    <path d="M456.5,631.5 C456.5,634.814 453.814,637.5 450.5,637.5 C447.186,637.5 444.5,634.814 444.5,631.5 C444.5,628.186 447.186,625.5 450.5,625.5 C453.814,625.5 456.5,628.186 456.5,631.5 z" fill="#F2E6DA"/>
+    <g>
+      <g>
+        <path d="M373.509,631.5 C373.509,643.098 364.107,652.5 352.509,652.5 C340.911,652.5 331.509,643.098 331.509,631.5 C331.509,619.902 340.911,610.5 352.509,610.5 C364.107,610.5 373.509,619.902 373.509,631.5 z" fill="#F2E6DA"/>
+        <path d="M373.509,631.5 C373.509,643.098 364.107,652.5 352.509,652.5 C340.911,652.5 331.509,643.098 331.509,631.5 C331.509,619.902 340.911,610.5 352.509,610.5 C364.107,610.5 373.509,619.902 373.509,631.5 z" fill-opacity="0" stroke="#C8A88A" stroke-width="1.2"/>
+      </g>
+      <text transform="matrix(1, 0, 0, 1, 352.509, 633)">
+        <tspan x="-8.5" y="5.5" font-family="PingFangSC-Regular" font-size="17" fill="#2D1A0E">水</tspan>
+      </text>
+    </g>
+    <g>
+      <g>
+        <path d="M568.75,631.5 C568.75,643.098 559.348,652.5 547.75,652.5 C536.152,652.5 526.75,643.098 526.75,631.5 C526.75,619.902 536.152,610.5 547.75,610.5 C559.348,610.5 568.75,619.902 568.75,631.5 z" fill="#F2E6DA"/>
+        <path d="M568.75,631.5 C568.75,643.098 559.348,652.5 547.75,652.5 C536.152,652.5 526.75,643.098 526.75,631.5 C526.75,619.902 536.152,610.5 547.75,610.5 C559.348,610.5 568.75,619.902 568.75,631.5 z" fill-opacity="0" stroke="#C8A88A" stroke-width="1.2"/>
+      </g>
+      <text transform="matrix(1, 0, 0, 1, 547.75, 632)">
+        <tspan x="-8.5" y="5.5" font-family="PingFangSC-Regular" font-size="17" fill="#2D1A0E">火</tspan>
+      </text>
+    </g>
+  </g>
+</svg>

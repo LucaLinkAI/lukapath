@@ -56,7 +56,7 @@ export function Landing() {
         {checking ? (
           <span style={{ color: 'var(--w4)' }}>正在检查 Claude 订阅连接…</span>
         ) : auth?.ok ? (
-          <span className="auth-ok">● 已连接 Claude Code 订阅{auth.apiKeySource ? ` (${auth.apiKeySource})` : ''}</span>
+          <span className="auth-ok">● 已连接 Claude Code 订阅{auth.apiKeySource && auth.apiKeySource !== 'none' ? ` (${auth.apiKeySource})` : ''}</span>
         ) : (
           <span className="auth-bad">● 未检测到已登录的 Claude Code</span>
         )}

@@ -2,6 +2,57 @@
 
 Chinese family destiny analysis app — BaZi (八字), Five Elements (五行), MBTI, and Western astrology combined into polished HTML reports for affluent Chinese families navigating child development and life decisions.
 
+## 使用说明
+
+### 第一步：启动 Studio
+
+确保已安装并登录 Claude Code CLI，然后在 `studio/` 目录下启动本地服务：
+
+```bash
+cd studio
+npm install
+npm run dev   # client :3000 · server :8787
+```
+
+浏览器打开 `http://localhost:3000`，看到如下落地页即为连接成功：
+
+![Studio 落地页](docs/screenshots/studio-landing.png)
+
+---
+
+### 第二步：选择报告类型，开始对话
+
+进入 Studio 后，左侧侧边栏列出四种报告类型。直接点击对应类型，或在对话框输入任意需求，罗盘会自动路由到对应的专项 skill：
+
+![Studio 对话界面](docs/screenshots/studio-chat.png)
+
+---
+
+### 第三步：了解 Skill 路由架构
+
+入口 meta-skill `lucapath` 理解用户意图后，自动分发到四个专项 skill。每个 skill 有独立的信息收集流程（3–6 步问答），最终生成一份完整的自包含 HTML 报告：
+
+![Skill 路由架构](docs/screenshots/skill-routing.png)
+
+| Skill | 适用场景 | 系统融合 |
+|-------|---------|---------|
+| `personal-destiny-report` | 个人命理分析 | 八字 × MBTI × 西方星盘 × 紫微斗数 |
+| `family-report` | 家族 / 亲子分析 | 八字 × MBTI × 五行生生链 |
+| `children-ai-report` | AI 时代孩子发展规划 | 八字 × MBTI × 星盘 × 兴趣爱好 |
+| `business-partner-report` | 创业合伙人相性 | 八字 × MBTI × 五行商业能量 |
+
+---
+
+### 参考：八字命理橙皮书
+
+如需了解八字命理基础知识，可查阅随项目发布的《八字命理入门与速查》橙皮书，内含定义、解读、案例与速查表：
+
+![八字命理橙皮书](docs/screenshots/bazi-orange-book.png)
+
+在线阅读：<https://lucalinkai.github.io/lukapath/Publish/bazi_orange_book.html>
+
+---
+
 ## Running the Studio
 
 The full Studio (Claude-style chat UI that drives the report skills) lives in `studio/`:
